@@ -1,0 +1,15 @@
+Here I explain the data structure in a PPM file, using the example of hsf_0_00000.ppm
+
+In xxd we can see the file is like :
+
+00000000: 5036 0a31 3238 2031 3238 0a32 3535 0aff  P6.128 128.255..
+00000010: ffff ffff ffff ffff ffff ffff ffff ffff  ................
+00000020: ffff ffff ffff ffff ffff ffff ffff ffff  ................
+...
+
+5036 = P6;
+0a = changing line;
+313238 = 128;
+20 = space;
+323535 = 255;
+ffffff = RGB(255, 255, 255) = color of white
