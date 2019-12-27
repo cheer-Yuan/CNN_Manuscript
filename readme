@@ -1,4 +1,9 @@
 Project: CNN Manuscript
 
 Version 0.0:
-Main function to be added.
+
+<<<<<<< dev >>>>>>> 
+features : 
+  -PNG 2 PPM : OK
+  -reader P6 RGB PPM : OK
+  -RGB 2 GS : OK
