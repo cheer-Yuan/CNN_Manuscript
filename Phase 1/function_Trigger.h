@@ -1,6 +1,7 @@
 //
 // Created by cheerfulliu on 11/01/2020.
 //
+//Activation function 
 
 #ifndef PHASE_1_FUNCTION_TRIGGER_H
 #define PHASE_1_FUNCTION_TRIGGER_H
