@@ -36,5 +36,13 @@ function convert()
 
 scan
 
-#Before running the program use : chmod +x ./converter.sh
+#Written in Shell language
 
+#Function: Convert all documents including child documents png to ppm 
+
+#Manual:
+#1). install ffmpeg in a terminal
+#2). move this file to your database of png documents or folders
+#3). open the path in last step in a terminal
+#4). run "chmod +x ./converter.sh"
+#5). run "./converter.sh"
