@@ -51,6 +51,7 @@ CovLayer* initCovLayer(int inputWidth,int inputHeight,int mapSize,int inChannels
                 for(c=0;c<mapSize;c++){
                     float randnum = (((float)rand() / (float)RAND_MAX) - 0.5) * 2;
                     covL->mapData[i][j][r][c] = randnum * sqrtf((float)6.0 / (float)(mapSize * mapSize * (inChannels + outChannels)));
+                    //printf("%f\n", covL->mapData[i][j][r][c]);  OK
                 }
             }
         }
@@ -195,7 +196,6 @@ void savecnn(CNN* cnn, const char* filename)
             for(r=0;r<cnn->C1->mapSize;r++)
             {
                 fwrite(cnn->C1->mapData[i][j][r],sizeof(float),cnn->C1->mapSize,fp);
-                printf("%f\t", cnn->C1->mapData[i][j][r]);
             }
 
 
@@ -252,16 +252,24 @@ void cnntrain(CNN* cnn,	ImgArr inputData,LabelArr outputData,CNNOpts opts,int tr
     for(e=0;e<opts.numepochs;e++){
         int n=0;
         for(n=0;n<trainNum;n++){
+
             cnnff(cnn,inputData->ImgPtr[n].ImgData);  // forward propaganda : calculate the error
+
+
 
             cnnbp(cnn,outputData->LabelPtr[n].LabelData);   // backward propaganda : calculate the gradients
 
 
 
-            char* filedir="E:\\Code\\Matlab\\PicTrans\\CNNData\\";
-            const char* filename=combine_strings(filedir,combine_strings(intTochar(n),".cnn"));
+            //char* filedir="E:\\Code\\Matlab\\PicTrans\\CNNData\\";
+            //const char* filename=combine_strings(filedir,combine_strings(intTochar(n),".cnn"));
+            const char* filename = "../cnn.txt";
             savecnndata(cnn,filename,inputData->ImgPtr[n].ImgData);
-            cnnapplygrads(cnn,opts,inputData->ImgPtr[n].ImgData); // 更新权重
+
+
+            cnnapplygrads(cnn,opts,inputData->ImgPtr[n].ImgData);           //passed too much time on it : Problem
+            exit(0);
+
 
             cnnclear(cnn);
             // calculate and save the error value
@@ -277,7 +285,7 @@ void cnntrain(CNN* cnn,	ImgArr inputData,LabelArr outputData,CNNOpts opts,int tr
     }
 }
 
-// forwarf prapaganda
+// forward prapaganda
 void cnnff(CNN* cnn,float** inputData)
 {
     int outSizeW=cnn->S2->inputWidth;
@@ -389,8 +397,8 @@ void cnnbp(CNN* cnn,float* outputData) // backwards propaganda
 
 
     // O3 layer
-    for(i=0;i<cnn->O3->outputNum;i++)
-        cnn->O3->d[i]=cnn->e[i]*sigma_derivation(cnn->O3->y[i]);
+    for(i = 0; i < cnn->O3->outputNum; i++)
+        cnn->O3->d[i] = cnn->e[i] * sigma_derivation(cnn->O3->y[i]);
 
 
     // S2 layer
@@ -402,6 +410,7 @@ void cnnbp(CNN* cnn,float* outputData) // backwards propaganda
                     int wInt=i*outSize.c*outSize.r+r*outSize.c+c;
                     cnn->S2->d[i][r][c]=cnn->S2->d[i][r][c]+cnn->O3->d[j]*cnn->O3->wData[j][wInt];
                 }
+
 
     // C1layer
     int mapdata=cnn->S2->mapSize;
@@ -417,6 +426,7 @@ void cnnbp(CNN* cnn,float* outputData) // backwards propaganda
             free(C1e[r]);
         free(C1e);
     }
+
 }
 
 void cnnapplygrads(CNN* cnn,CNNOpts opts,float** inputData) // renew weights in S layer C1 layer and O3 layer
@@ -425,21 +435,28 @@ void cnnapplygrads(CNN* cnn,CNNOpts opts,float** inputData) // renew weights in 
     int i,j,r,c;
 
     // C1 layer
-    nSize dSize={cnn->S2->inputHeight,cnn->S2->inputWidth};
-    nSize ySize={cnn->C1->inputHeight,cnn->C1->inputWidth};
-    nSize mapSize={cnn->C1->mapSize,cnn->C1->mapSize};
+    nSize dSize={cnn->S2->inputHeight,cnn->S2->inputWidth};     //124, 124
+    nSize ySize={cnn->C1->inputHeight,cnn->C1->inputWidth};     //128, 128
+    nSize mapSize={cnn->C1->mapSize,cnn->C1->mapSize};          //5, 5
 
-    for(i=0;i<cnn->C1->outChannels;i++){
-        for(j=0;j<cnn->C1->inChannels;j++){
+    for(i=0;i<cnn->C1->outChannels;i++){    //<1
+        for(j=0;j<cnn->C1->inChannels;j++){     //<1
+
             float** flipinputData=rotate180(inputData,ySize);
             float** C1dk=cov(cnn->C1->d[i],dSize,flipinputData,ySize,valid);
             multifactor(C1dk,C1dk,mapSize,-1*opts.alpha);
             addmat(cnn->C1->mapData[j][i],cnn->C1->mapData[j][i],mapSize,C1dk,mapSize);
             for(r=0;r<(dSize.r-(ySize.r-1));r++)
+            {
+
                 free(C1dk[r]);
+            }
             free(C1dk);
             for(r=0;r<ySize.r;r++)
+            {
+
                 free(flipinputData[r]);
+            }
             free(flipinputData);
         }
         cnn->C1->basicData[i]=cnn->C1->basicData[i]-opts.alpha*summat(cnn->C1->d[i],dSize);
@@ -451,11 +468,17 @@ void cnnapplygrads(CNN* cnn,CNNOpts opts,float** inputData) // renew weights in 
     for(i=0;i<(cnn->S2->outChannels);i++)
         for(r=0;r<outSize.r;r++)
             for(c=0;c<outSize.c;c++)
+            {
                 O3inData[i*outSize.r*outSize.c+r*outSize.c+c]=cnn->S2->y[i][r][c];
 
+            }
+printf("%d", cnn->O3->inputNum);
     for(j=0;j<cnn->O3->outputNum;j++){
         for(i=0;i<cnn->O3->inputNum;i++)
+        {
+
             cnn->O3->wData[j][i]=cnn->O3->wData[j][i]-opts.alpha*cnn->O3->d[j]*O3inData[i];
+        }
         cnn->O3->basicData[j]=cnn->O3->basicData[j]-opts.alpha*cnn->O3->d[j];
     }
     free(O3inData);

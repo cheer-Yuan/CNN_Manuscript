@@ -40,9 +40,7 @@ void savemat(float** mat,nSize matSize,const char* filename);
 void multifactor(float** res, float** mat, nSize matSize, float factor);
 float summat(float** mat,nSize matSize);
 
-char * combine_strings(char *a, char *b);
-
-char* intTochar(int i);
+char * combine_strings(const char *a, const char *b);
 
 
 #endif //VERSION_CONVOLUTIONNAL_MAT_H

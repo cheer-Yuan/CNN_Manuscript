@@ -36,7 +36,5 @@ LabelArr read_Lable(const char* filename); // read label
 
 ImgArr read_Img(const char* filename); // readimg
 
-void save_Img(ImgArr imgarr,char* filedir); //save
-
 
 #endif //VERSION_CONVOLUTIONNAL_DATA_IMAGES_H
