@@ -23,6 +23,7 @@ ImgArr read_Img(const char* filename)
     struct dirent **namelist;
 
     int n = scandir(filename, &namelist, 0, alphasort);
+    printf("%d\n", n);
 
 
     // initialize the container of the image
@@ -109,7 +110,7 @@ LabelArr read_Lable(const char* filename)
         printf("open file failed\n");
     assert(fp);
 
-    int number_of_labels = 10;
+    int number_of_labels = 20;
     int label_long = 10;
 
 

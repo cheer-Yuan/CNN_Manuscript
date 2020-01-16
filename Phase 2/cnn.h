@@ -82,7 +82,7 @@ typedef struct cnn_network
     PoolLayer *S2;
     OutLayer* O3;
     float *e; // error of training
-    float *L; // (Instantaneous error energy ? )
+
 } CNN;
 
 typedef struct train_opts

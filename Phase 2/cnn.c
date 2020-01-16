@@ -243,16 +243,14 @@ void importcnn(CNN* cnn, const char* filename)
     fclose(fp);
 }
 
+//main function of the training
 void cnntrain(CNN* cnn,	ImgArr inputData,LabelArr outputData,CNNOpts opts,int trainNum)
 {
 
-    cnn->L=(float*)malloc(trainNum*sizeof(float));
-    int e;
-
-    for(e=0;e<opts.numepochs;e++){
-        int n=0;
-        for(n=0;n<trainNum;n++){
-
+    for(int e = 0;e<opts.numepochs;e++){
+        printf("Epoch num : %d\n", e + 1);
+        for(int n = 0;n<trainNum;n++){
+            printf("Training num : %d\n", n + 1);
             cnnff(cnn,inputData->ImgPtr[n].ImgData);  // forward propaganda : calculate the error
 
 
@@ -268,19 +266,10 @@ void cnntrain(CNN* cnn,	ImgArr inputData,LabelArr outputData,CNNOpts opts,int tr
 
 
             cnnapplygrads(cnn,opts,inputData->ImgPtr[n].ImgData);           //passed too much time on it : Problem
-            exit(0);
+
 
 
             cnnclear(cnn);
-            // calculate and save the error value
-            float l=0.0;
-            int i;
-            for(i=0;i<cnn->O3->outputNum;i++)
-                l=l+cnn->e[i]*cnn->e[i];
-            if(n==0)
-                cnn->L[n]=l/(float)2.0;
-            else
-                cnn->L[n]=cnn->L[n-1]*0.99+0.01*l/(float)2.0;
         }
     }
 }
@@ -472,7 +461,7 @@ void cnnapplygrads(CNN* cnn,CNNOpts opts,float** inputData) // renew weights in 
                 O3inData[i*outSize.r*outSize.c+r*outSize.c+c]=cnn->S2->y[i][r][c];
 
             }
-printf("%d", cnn->O3->inputNum);
+
     for(j=0;j<cnn->O3->outputNum;j++){
         for(i=0;i<cnn->O3->inputNum;i++)
         {
