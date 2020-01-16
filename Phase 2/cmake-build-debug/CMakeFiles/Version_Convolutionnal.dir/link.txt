@@ -1,0 +1,1 @@
+/usr/bin/gcc -g   CMakeFiles/Version_Convolutionnal.dir/main.c.o CMakeFiles/Version_Convolutionnal.dir/cnn.c.o CMakeFiles/Version_Convolutionnal.dir/data_Images.c.o CMakeFiles/Version_Convolutionnal.dir/mat.c.o CMakeFiles/Version_Convolutionnal.dir/test.c.o  -o Version_Convolutionnal -lm 

@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/melisa/git/CNN_Manuscript/Phase 1/main.c
+stdio.h
+-
+reader.h
+/home/melisa/git/CNN_Manuscript/Phase 1/reader.h
+stdlib.h
+-
+
+/home/melisa/git/CNN_Manuscript/Phase 1/reader.h
+bits/types/FILE.h
+-
+stdio.h
+-
+stdlib.h
+-
+

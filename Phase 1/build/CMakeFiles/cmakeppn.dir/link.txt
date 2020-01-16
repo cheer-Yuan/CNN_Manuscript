@@ -1,0 +1,1 @@
+/usr/bin/cc    CMakeFiles/cmakeppn.dir/main.c.o  -o cmakeppn 
