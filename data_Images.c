@@ -89,7 +89,7 @@ ImgArr read_Img(const char* filename)
                     //since here is no grayscale or colors, we just take 0 directly when we meet
                     //a value different to 255
                     //imgarr->ImgPtr[i].ImgData[r][c] = (float) (rgb2Grayscale(rr, g, b));
-                    if (rr == 255) imgarr->ImgPtr[i].ImgData[r][c] = 255.0;
+              `       if (rr == 255) imgarr->ImgPtr[i].ImgData[r][c] = 255.0;
                     else imgarr->ImgPtr[i].ImgData[r][c] = 0.0;
                     compt++;
                 }

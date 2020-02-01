@@ -271,7 +271,8 @@ void cnntrain(CNN* cnn,	ImgArr inputData,LabelArr outputData,CNNOpts opts,int tr
             savecnndata(cnn,filename,inputData->ImgPtr[n].ImgData);
 
 
-            cnnapplygrads(cnn,opts,inputData->ImgPtr[n].ImgData);           //passed too much time on it : Problem
+            cnnapplygrads(cnn,opts,inputData->ImgPtr[n].ImgData);
+            cnnapplygrads(cnn,opts,inputData->ImgPtr[n].ImgData);          //passed too much time on it : Problem
 
 
 
@@ -427,23 +428,24 @@ void cnnapplygrads(CNN* cnn,CNNOpts opts,float** inputData) // renew weights in 
     nSize ySize={cnn->C1->inputHeight,cnn->C1->inputWidth};     //128, 128
     nSize mapSize={cnn->C1->mapSize,cnn->C1->mapSize};          //5, 5
 
-    for(i=0;i<cnn->C1->outChannels;++i){    //<1
+    for(i=0;i<cnn->C1->outChannels;++i){    //<1            put j loop before i loop ????
         for(j=0;j<cnn->C1->inChannels;++j){     //<1
 
             float** flipinputData=rotate180(inputData,ySize);
             float** C1dk=cov(cnn->C1->d[i],dSize,flipinputData,ySize,valid);
             multifactor(C1dk,C1dk,mapSize,-1*opts.alpha);
-            addmat(cnn->C1->mapData[j][i],cnn->C1->mapData[j][i],mapSize,C1dk,mapSize);
+            addmat(cnn->C1->mapData[j][i],cnn->C1->mapData[j][i],mapSize,C1dk,mapSize); // j i or i j???????   repeated operations non necessary???
+            // sens de memoire
             for(r=0;r<(dSize.r-(ySize.r-1));++r)
             {
 
-                free(C1dk[r]);
+                free(C1dk[r]);      // error ptr[0] = ptr, commence liberation a partir de 1
             }
             free(C1dk);
             for(r=0;r<ySize.r;++r)
             {
 
-                free(flipinputData[r]);
+                free(flipinputData[r]);     //meme que avant
             }
             free(flipinputData);
         }

@@ -1,3 +1,3 @@
-/home/cheerfulliu/Desktop/Version_Convolutionnal/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/cheerfulliu/Desktop/Version_Convolutionnal/cmake-build-debug/CMakeFiles/Version_Convolutionnal.dir
-/home/cheerfulliu/Desktop/Version_Convolutionnal/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/cheerfulliu/Desktop/GIT pb/CNN_Manuscript/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/cheerfulliu/Desktop/GIT pb/CNN_Manuscript/cmake-build-debug/CMakeFiles/Version_Convolutionnal.dir
+/home/cheerfulliu/Desktop/GIT pb/CNN_Manuscript/cmake-build-debug/CMakeFiles/edit_cache.dir

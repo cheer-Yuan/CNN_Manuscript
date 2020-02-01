@@ -6,25 +6,25 @@
 
 #IncludeRegexTransform: 
 
-/home/cheerfulliu/Desktop/Version_Convolutionnal/cnn.h
+/home/cheerfulliu/Desktop/GIT pb/CNN_Manuscript/cnn.h
 stdbool.h
 -
 mat.h
-/home/cheerfulliu/Desktop/Version_Convolutionnal/mat.h
+/home/cheerfulliu/Desktop/GIT pb/CNN_Manuscript/mat.h
 data_Images.h
-/home/cheerfulliu/Desktop/Version_Convolutionnal/data_Images.h
+/home/cheerfulliu/Desktop/GIT pb/CNN_Manuscript/data_Images.h
 
-/home/cheerfulliu/Desktop/Version_Convolutionnal/data_Images.h
+/home/cheerfulliu/Desktop/GIT pb/CNN_Manuscript/data_Images.h
 
-/home/cheerfulliu/Desktop/Version_Convolutionnal/main.c
+/home/cheerfulliu/Desktop/GIT pb/CNN_Manuscript/main.c
 data_Images.h
-/home/cheerfulliu/Desktop/Version_Convolutionnal/data_Images.h
+/home/cheerfulliu/Desktop/GIT pb/CNN_Manuscript/data_Images.h
 cnn.h
-/home/cheerfulliu/Desktop/Version_Convolutionnal/cnn.h
+/home/cheerfulliu/Desktop/GIT pb/CNN_Manuscript/cnn.h
 mat.h
-/home/cheerfulliu/Desktop/Version_Convolutionnal/mat.h
+/home/cheerfulliu/Desktop/GIT pb/CNN_Manuscript/mat.h
 
-/home/cheerfulliu/Desktop/Version_Convolutionnal/mat.h
+/home/cheerfulliu/Desktop/GIT pb/CNN_Manuscript/mat.h
 stdlib.h
 -
 string.h

@@ -118,7 +118,7 @@ void train_1()
 {
     //read images
     ImgArr trainImg_0_1 = read_Img("../train_and_test_0/train_1/");
-    LabelArr trainLabel_0_1 = read_Lable("../train_and_test_0/label_train_.txt");
+    LabelArr trainLabel_0_1 = read_Lable("../train_and_test_0/label_train_1.txt");
 
 
     nSize inputSize={trainImg_0_1->ImgPtr[0].c,trainImg_0_1->ImgPtr[0].r};  //define data size
@@ -174,13 +174,13 @@ int main()
      * here we train the network on 20 zeros and 20 1
      */
 
-    //train_0_1_20();
+    train_1();
     //train_1_2_20_intersect();
     //train_0_o_20();
     //train_o();
     //test_Network_on_1();
     //test_Network_on_0();
-    test_Network_on_O();
+    //test_Network_on_O();
     return 0;
 
 }

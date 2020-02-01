@@ -8,28 +8,28 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/home/cheerfulliu/Desktop/Version_Convolutionnal/cmake-build-debug"/>
+				<Option working_dir="/home/cheerfulliu/Desktop/GIT pb/CNN_Manuscript/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/cheerfulliu/Desktop/Version_Convolutionnal/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/cheerfulliu/Desktop/Version_Convolutionnal/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/cheerfulliu/Desktop/Version_Convolutionnal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/cheerfulliu/Desktop/Version_Convolutionnal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/cheerfulliu/Desktop/GIT\ pb/CNN_Manuscript/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/cheerfulliu/Desktop/GIT\ pb/CNN_Manuscript/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/cheerfulliu/Desktop/GIT\ pb/CNN_Manuscript/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/cheerfulliu/Desktop/GIT\ pb/CNN_Manuscript/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/home/cheerfulliu/Desktop/Version_Convolutionnal/cmake-build-debug"/>
+				<Option working_dir="/home/cheerfulliu/Desktop/GIT pb/CNN_Manuscript/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/cheerfulliu/Desktop/Version_Convolutionnal/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/cheerfulliu/Desktop/Version_Convolutionnal/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/cheerfulliu/Desktop/Version_Convolutionnal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/cheerfulliu/Desktop/Version_Convolutionnal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/cheerfulliu/Desktop/GIT\ pb/CNN_Manuscript/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/cheerfulliu/Desktop/GIT\ pb/CNN_Manuscript/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/cheerfulliu/Desktop/GIT\ pb/CNN_Manuscript/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/cheerfulliu/Desktop/GIT\ pb/CNN_Manuscript/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Version_Convolutionnal">
-				<Option output="/home/cheerfulliu/Desktop/Version_Convolutionnal/cmake-build-debug/Version_Convolutionnal" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/cheerfulliu/Desktop/Version_Convolutionnal/cmake-build-debug"/>
+				<Option output="/home/cheerfulliu/Desktop/GIT pb/CNN_Manuscript/cmake-build-debug/Version_Convolutionnal" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/cheerfulliu/Desktop/GIT pb/CNN_Manuscript/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -41,15 +41,15 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/cheerfulliu/Desktop/Version_Convolutionnal/cmake-build-debug/Makefile&quot;  VERBOSE=1 Version_Convolutionnal"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/cheerfulliu/Desktop/Version_Convolutionnal/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/cheerfulliu/Desktop/Version_Convolutionnal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/cheerfulliu/Desktop/Version_Convolutionnal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/cheerfulliu/Desktop/GIT\ pb/CNN_Manuscript/cmake-build-debug/Makefile&quot;  VERBOSE=1 Version_Convolutionnal"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/cheerfulliu/Desktop/GIT\ pb/CNN_Manuscript/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/cheerfulliu/Desktop/GIT\ pb/CNN_Manuscript/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/cheerfulliu/Desktop/GIT\ pb/CNN_Manuscript/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Version_Convolutionnal/fast">
-				<Option output="/home/cheerfulliu/Desktop/Version_Convolutionnal/cmake-build-debug/Version_Convolutionnal" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/cheerfulliu/Desktop/Version_Convolutionnal/cmake-build-debug"/>
+				<Option output="/home/cheerfulliu/Desktop/GIT pb/CNN_Manuscript/cmake-build-debug/Version_Convolutionnal" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/cheerfulliu/Desktop/GIT pb/CNN_Manuscript/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -61,54 +61,54 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/cheerfulliu/Desktop/Version_Convolutionnal/cmake-build-debug/Makefile&quot;  VERBOSE=1 Version_Convolutionnal/fast"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/cheerfulliu/Desktop/Version_Convolutionnal/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/cheerfulliu/Desktop/Version_Convolutionnal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/cheerfulliu/Desktop/Version_Convolutionnal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/cheerfulliu/Desktop/GIT\ pb/CNN_Manuscript/cmake-build-debug/Makefile&quot;  VERBOSE=1 Version_Convolutionnal/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/cheerfulliu/Desktop/GIT\ pb/CNN_Manuscript/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/cheerfulliu/Desktop/GIT\ pb/CNN_Manuscript/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/cheerfulliu/Desktop/GIT\ pb/CNN_Manuscript/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/home/cheerfulliu/Desktop/Version_Convolutionnal/cmake-build-debug"/>
+				<Option working_dir="/home/cheerfulliu/Desktop/GIT pb/CNN_Manuscript/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/cheerfulliu/Desktop/Version_Convolutionnal/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/cheerfulliu/Desktop/Version_Convolutionnal/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/cheerfulliu/Desktop/Version_Convolutionnal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/cheerfulliu/Desktop/Version_Convolutionnal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/cheerfulliu/Desktop/GIT\ pb/CNN_Manuscript/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/cheerfulliu/Desktop/GIT\ pb/CNN_Manuscript/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/cheerfulliu/Desktop/GIT\ pb/CNN_Manuscript/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/cheerfulliu/Desktop/GIT\ pb/CNN_Manuscript/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/cheerfulliu/Desktop/Version_Convolutionnal/cnn.c">
+		<Unit filename="/home/cheerfulliu/Desktop/GIT pb/CNN_Manuscript/cnn.c">
 			<Option target="Version_Convolutionnal"/>
 		</Unit>
-		<Unit filename="/home/cheerfulliu/Desktop/Version_Convolutionnal/cnn.h">
+		<Unit filename="/home/cheerfulliu/Desktop/GIT pb/CNN_Manuscript/cnn.h">
 			<Option target="Version_Convolutionnal"/>
 		</Unit>
-		<Unit filename="/home/cheerfulliu/Desktop/Version_Convolutionnal/data_Images.c">
+		<Unit filename="/home/cheerfulliu/Desktop/GIT pb/CNN_Manuscript/data_Images.c">
 			<Option target="Version_Convolutionnal"/>
 		</Unit>
-		<Unit filename="/home/cheerfulliu/Desktop/Version_Convolutionnal/data_Images.h">
+		<Unit filename="/home/cheerfulliu/Desktop/GIT pb/CNN_Manuscript/data_Images.h">
 			<Option target="Version_Convolutionnal"/>
 		</Unit>
-		<Unit filename="/home/cheerfulliu/Desktop/Version_Convolutionnal/label_Writer.cpp">
+		<Unit filename="/home/cheerfulliu/Desktop/GIT pb/CNN_Manuscript/label_Writer.cpp">
 			<Option target="Version_Convolutionnal"/>
 		</Unit>
-		<Unit filename="/home/cheerfulliu/Desktop/Version_Convolutionnal/main.c">
+		<Unit filename="/home/cheerfulliu/Desktop/GIT pb/CNN_Manuscript/main.c">
 			<Option target="Version_Convolutionnal"/>
 		</Unit>
-		<Unit filename="/home/cheerfulliu/Desktop/Version_Convolutionnal/mat.c">
+		<Unit filename="/home/cheerfulliu/Desktop/GIT pb/CNN_Manuscript/mat.c">
 			<Option target="Version_Convolutionnal"/>
 		</Unit>
-		<Unit filename="/home/cheerfulliu/Desktop/Version_Convolutionnal/mat.h">
+		<Unit filename="/home/cheerfulliu/Desktop/GIT pb/CNN_Manuscript/mat.h">
 			<Option target="Version_Convolutionnal"/>
 		</Unit>
-		<Unit filename="/home/cheerfulliu/Desktop/Version_Convolutionnal/rgb2Grayscale.h">
+		<Unit filename="/home/cheerfulliu/Desktop/GIT pb/CNN_Manuscript/rgb2Grayscale.h">
 			<Option target="Version_Convolutionnal"/>
 		</Unit>
-		<Unit filename="/home/cheerfulliu/Desktop/Version_Convolutionnal/test.c">
+		<Unit filename="/home/cheerfulliu/Desktop/GIT pb/CNN_Manuscript/test.c">
 			<Option target="Version_Convolutionnal"/>
 		</Unit>
-		<Unit filename="/home/cheerfulliu/Desktop/Version_Convolutionnal/CMakeLists.txt">
+		<Unit filename="/home/cheerfulliu/Desktop/GIT pb/CNN_Manuscript/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

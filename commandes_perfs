@@ -1,0 +1,7 @@
+ sudo apt-get install linux-tools-5.0.0-37-generic
+
+ perf record -g ./Version_Convolutionnal
+
+sudo perf record -g ./Version_Convolutionnal
+
+perf report
