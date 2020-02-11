@@ -168,6 +168,63 @@ void train_o()
     savecnn(cnn,"../train_of_o.cnn");
 }
 
+
+//TEST cnn_1
+void train_cnn_1()
+{
+    //read images
+    ImgArr trainImg_0 = read_Img("../train_and_test_0/train_0/");
+    LabelArr trainLabel_0 = read_Lable("../train_and_test_0/label_train_0.txt");
+    ImgArr trainImg_1 = read_Img("../train_and_test_0/train_o/");
+    LabelArr trainLabel_1 = read_Lable("../train_and_test_0/label_train_o.txt");
+
+    nSize inputSize={trainImg_0->ImgPtr[0].c,trainImg_0->ImgPtr[0].r};  //define data size
+
+    int outSize=trainLabel_0->LabelPtr[0].l;
+
+    //initializing
+    CNN_1* cnn = (CNN_1*)malloc(sizeof(CNN_1));
+    cnnsetup_nn_1(cnn, inputSize, outSize);
+
+
+    // train on 0s and 1s
+    CNNOpts opts;
+    opts.numepochs = 1;
+    opts.alpha = 1.0;
+    int trainNum = 5;
+    cnntrain(cnn,trainImg_0,trainLabel_0,opts,trainNum);
+    cnntrain(cnn,trainImg_1,trainLabel_1,opts,trainNum);
+
+    printf("train finished!!\n");
+    savecnn(cnn,"../train_of_0_o_20.cnn");
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 int main()
 {
     /*

@@ -13,6 +13,7 @@ void cnnsetup(CNN* cnn, nSize inputSize,int outputSize)
     int mapSize = 5;
     inSize.c = inputSize.c;
     inSize.r = inputSize.r;
+
     cnn->C1 = initCovLayer(inSize.c, inSize.r, 5, 1, 1);
     inSize.c = inSize.c-mapSize + 1;
     inSize.r = inSize.r-mapSize + 1;
@@ -25,6 +26,7 @@ void cnnsetup(CNN* cnn, nSize inputSize,int outputSize)
 
     cnn->e=(float*)calloc(cnn->O3->outputNum,sizeof(float));
 }
+
 
 CovLayer* initCovLayer(int inputWidth,int inputHeight,int mapSize,int inChannels,int outChannels)
 {
@@ -122,6 +124,7 @@ PoolLayer* initPoolLayer(int inputWidth,int inputHeight,int mapSize,int inChanne
     return poolL;
 }
 
+//initialize a fully connected layer
 OutLayer* initOutLayer(int inputNum, int outputNum)
 {
     OutLayer* outL = (OutLayer*)malloc(sizeof(OutLayer));
@@ -143,7 +146,7 @@ OutLayer* initOutLayer(int inputNum, int outputNum)
         outL->wData[i] = (float*)malloc(inputNum*sizeof(float));
         for(int j = 0;j < inputNum; ++j){
             float randnum = (((float)rand() / (float)RAND_MAX) - 0.5) * 2; //generate a fake random number
-            //make the value approching zero : avoid the saturation of the neurons during the proces odf training
+            //make the value approching zero : avoid the saturation of the neurons when training
             outL->wData[i][j] = randnum * sqrt((float)6.0 / (float)(inputNum + outputNum));
         }
     }
@@ -250,38 +253,26 @@ void importcnn(CNN* cnn, const char* filename)
 }
 
 //main function of the training
-void cnntrain(CNN* cnn,	ImgArr inputData,LabelArr outputData,CNNOpts opts,int trainNum)
+void cnntrain(CNN* cnn, ImgArr inputData, LabelArr outputData, CNNOpts opts, int trainNum)
 {
-
     for(int e = 0;e<opts.numepochs;e++){
         printf("Epoch num : %d\n", e + 1);
-        for(int n = 0;n<trainNum;++n){
+        for(int n = 0; n < trainNum; ++n)
+        {
             printf("Training num : %d\n", n + 1);
-            cnnff(cnn,inputData->ImgPtr[n].ImgData);  // forward propaganda : calculate the error
-
-
-
-            cnnbp(cnn,outputData->LabelPtr[n].LabelData);   // backward propaganda : calculate the gradients
-
-
-
+            cnnff(cnn, inputData->ImgPtr[n].ImgData);  // forward propagation : calculate the error
+            cnnbp(cnn, outputData->LabelPtr[n].LabelData);   // backward propagation : calculate the gradients
             //char* filedir="E:\\Code\\Matlab\\PicTrans\\CNNData\\";
             //const char* filename=combine_strings(filedir,combine_strings(intTochar(n),".cnn"));
             const char* filename = "../cnn.txt";
-            savecnndata(cnn,filename,inputData->ImgPtr[n].ImgData);
-
-
-            cnnapplygrads(cnn,opts,inputData->ImgPtr[n].ImgData);
-            cnnapplygrads(cnn,opts,inputData->ImgPtr[n].ImgData);          //passed too much time on it : Problem
-
-
-
+            savecnndata(cnn, filename, inputData->ImgPtr[n].ImgData);
+            cnnapplygrads(cnn, opts, inputData->ImgPtr[n].ImgData);          //passed too much time on it : Problem
             cnnclear(cnn);
         }
     }
 }
 
-// forward prapaganda
+// forward propagation
 void    cnnff(CNN* cnn,float** inputData)
 {
     int outSizeW=cnn->S2->inputWidth;
@@ -364,7 +355,7 @@ float vecMulti(float* vec1, float* vec2, int vecL)
     return m;
 }
 
-//forward propagand of the output layer
+//forward propagation of the output layer
 void nnff(float* output, float* input, float** wdata, float* bas, nSize nnSize)
 {
     int w = nnSize.c;

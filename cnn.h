@@ -71,6 +71,7 @@ typedef struct nn_layer
     bool isFullConnect; //whether is fully connected
 } OutLayer;
 
+
 typedef struct cnn_network
 {
     int layerNum;

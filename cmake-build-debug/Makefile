@@ -48,10 +48,10 @@ RM = /snap/clion/100/bin/cmake/linux/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/home/cheerfulliu/Desktop/GIT pb/CNN_Manuscript"
+CMAKE_SOURCE_DIR = /home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/home/cheerfulliu/Desktop/GIT pb/CNN_Manuscript/cmake-build-debug"
+CMAKE_BINARY_DIR = /home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/cheerfulliu/Desktop/GIT pb/CNN_Manuscript/cmake-build-debug/CMakeFiles" "/home/cheerfulliu/Desktop/GIT pb/CNN_Manuscript/cmake-build-debug/CMakeFiles/progress.marks"
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/cmake-build-debug/CMakeFiles /home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/cheerfulliu/Desktop/GIT pb/CNN_Manuscript/cmake-build-debug/CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -149,6 +149,33 @@ cnn.s: cnn.c.s
 cnn.c.s:
 	$(MAKE) -f CMakeFiles/Version_Convolutionnal.dir/build.make CMakeFiles/Version_Convolutionnal.dir/cnn.c.s
 .PHONY : cnn.c.s
+
+cnn_1.o: cnn_1.c.o
+
+.PHONY : cnn_1.o
+
+# target to build an object file
+cnn_1.c.o:
+	$(MAKE) -f CMakeFiles/Version_Convolutionnal.dir/build.make CMakeFiles/Version_Convolutionnal.dir/cnn_1.c.o
+.PHONY : cnn_1.c.o
+
+cnn_1.i: cnn_1.c.i
+
+.PHONY : cnn_1.i
+
+# target to preprocess a source file
+cnn_1.c.i:
+	$(MAKE) -f CMakeFiles/Version_Convolutionnal.dir/build.make CMakeFiles/Version_Convolutionnal.dir/cnn_1.c.i
+.PHONY : cnn_1.c.i
+
+cnn_1.s: cnn_1.c.s
+
+.PHONY : cnn_1.s
+
+# target to generate assembly for a file
+cnn_1.c.s:
+	$(MAKE) -f CMakeFiles/Version_Convolutionnal.dir/build.make CMakeFiles/Version_Convolutionnal.dir/cnn_1.c.s
+.PHONY : cnn_1.c.s
 
 data_Images.o: data_Images.c.o
 
@@ -270,6 +297,9 @@ help:
 	@echo "... cnn.o"
 	@echo "... cnn.i"
 	@echo "... cnn.s"
+	@echo "... cnn_1.o"
+	@echo "... cnn_1.i"
+	@echo "... cnn_1.s"
 	@echo "... data_Images.o"
 	@echo "... data_Images.i"
 	@echo "... data_Images.s"
