@@ -73,26 +73,31 @@ ImgArr read_Img(const char* filename)
 
         int compt = 0;
 
-        for (int i = 0; i < number_of_images; ++i) {
+        for (int i = 0; i < number_of_images; ++i)
+        {
             imgarr->ImgPtr[i].r = n_rows;
             imgarr->ImgPtr[i].c = n_cols;
             imgarr->ImgPtr[i].ImgData = (float**) malloc(n_rows * sizeof(float*));
             for (int r = 0; r < n_rows; ++r) {
                 imgarr->ImgPtr[i].ImgData[r] = (float *) malloc(n_cols * sizeof(float));
-                for (int c = 0; c < n_cols; ++c) {
+                for (int c = 0; c < n_cols; ++c)
+                {
                     // transfer to float
-                    unsigned char rr, g, b = 0;
-                    fread((unsigned char*) &rr, 1, 1, fp);
-                    fread((unsigned char*) &g, 1, 1, fp);
-                    fread((unsigned char*) &b, 1, 1, fp);
+                    unsigned char rr = 0, g = 0, b = 0;
+                    fread((unsigned char *) &rr, 1, 1, fp);
+                    fread((unsigned char *) &g, 1, 1, fp);
+                    fread((unsigned char *) &b, 1, 1, fp);
 
                     //since here is no grayscale or colors, we just take 0 directly when we meet
                     //a value different to 255
                     //imgarr->ImgPtr[i].ImgData[r][c] = (float) (rgb2Grayscale(rr, g, b));
-              `       if (rr == 255) imgarr->ImgPtr[i].ImgData[r][c] = 255.0;
-                    else imgarr->ImgPtr[i].ImgData[r][c] = 0.0;
+                    if (rr == 255)
+                        imgarr->ImgPtr[i].ImgData[r][c] = 255.0;
+                    else
+                        imgarr->ImgPtr[i].ImgData[r][c] = 0.0;
                     compt++;
                 }
+
             }
         }
         fclose(fp);

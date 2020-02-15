@@ -1,8 +1,10 @@
 #include "data_Images.h"
-#include "cnn.h"
+//#include "cnn.h"
 #include "mat.h"
 
+#include "cnn_1.h"
 
+/*
 void test_Network_on_O()
 {
     ImgArr testImg = read_Img("../train_and_test_0/test_1/");
@@ -167,7 +169,7 @@ void train_o()
     printf("train finished!!\n");
     savecnn(cnn,"../train_of_o.cnn");
 }
-
+*/
 
 //TEST cnn_1
 void train_cnn_1()
@@ -175,16 +177,14 @@ void train_cnn_1()
     //read images
     ImgArr trainImg_0 = read_Img("../train_and_test_0/train_0/");
     LabelArr trainLabel_0 = read_Lable("../train_and_test_0/label_train_0.txt");
-    ImgArr trainImg_1 = read_Img("../train_and_test_0/train_o/");
-    LabelArr trainLabel_1 = read_Lable("../train_and_test_0/label_train_o.txt");
 
     nSize inputSize={trainImg_0->ImgPtr[0].c,trainImg_0->ImgPtr[0].r};  //define data size
 
-    int outSize=trainLabel_0->LabelPtr[0].l;
+    int outSize = trainLabel_0->LabelPtr[0].l;
 
     //initializing
     CNN_1* cnn = (CNN_1*)malloc(sizeof(CNN_1));
-    cnnsetup_nn_1(cnn, inputSize, outSize);
+    cnnsetup_1(cnn, inputSize.c * inputSize.r, outSize);
 
 
     // train on 0s and 1s
@@ -193,12 +193,10 @@ void train_cnn_1()
     opts.alpha = 1.0;
     int trainNum = 5;
     cnntrain(cnn,trainImg_0,trainLabel_0,opts,trainNum);
-    cnntrain(cnn,trainImg_1,trainLabel_1,opts,trainNum);
 
     printf("train finished!!\n");
-    savecnn(cnn,"../train_of_0_o_20.cnn");
+    savecnn(cnn,"../train_of_cnn_1_on_0_20.cnn");
 }
-
 
 
 
@@ -231,7 +229,7 @@ int main()
      * here we train the network on 20 zeros and 20 1
      */
 
-    train_1();
+    train_cnn_1();
     //train_1_2_20_intersect();
     //train_0_o_20();
     //train_o();
