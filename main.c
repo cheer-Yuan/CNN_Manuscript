@@ -184,14 +184,14 @@ void train_cnn_1()
 
     //initializing
     CNN_1* cnn = (CNN_1*)malloc(sizeof(CNN_1));
-    cnnsetup_1(cnn, inputSize.c * inputSize.r, outSize);
+    cnnsetup_1(cnn, 30, outSize);
 
 
     // train on 0s and 1s
     CNNOpts opts;
     opts.numepochs = 1;
     opts.alpha = 1.0;
-    int trainNum = 5;
+    int trainNum = 1;
     cnntrain(cnn,trainImg_0,trainLabel_0,opts,trainNum);
 
     printf("train finished!!\n");

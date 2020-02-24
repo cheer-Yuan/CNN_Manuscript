@@ -78,12 +78,6 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/cnn.c">
-			<Option target="Version_Convolutionnal"/>
-		</Unit>
-		<Unit filename="/home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/cnn.h">
-			<Option target="Version_Convolutionnal"/>
-		</Unit>
 		<Unit filename="/home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/cnn_1.c">
 			<Option target="Version_Convolutionnal"/>
 		</Unit>

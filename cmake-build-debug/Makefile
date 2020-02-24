@@ -123,33 +123,6 @@ Version_Convolutionnal/fast:
 	$(MAKE) -f CMakeFiles/Version_Convolutionnal.dir/build.make CMakeFiles/Version_Convolutionnal.dir/build
 .PHONY : Version_Convolutionnal/fast
 
-cnn.o: cnn.c.o
-
-.PHONY : cnn.o
-
-# target to build an object file
-cnn.c.o:
-	$(MAKE) -f CMakeFiles/Version_Convolutionnal.dir/build.make CMakeFiles/Version_Convolutionnal.dir/cnn.c.o
-.PHONY : cnn.c.o
-
-cnn.i: cnn.c.i
-
-.PHONY : cnn.i
-
-# target to preprocess a source file
-cnn.c.i:
-	$(MAKE) -f CMakeFiles/Version_Convolutionnal.dir/build.make CMakeFiles/Version_Convolutionnal.dir/cnn.c.i
-.PHONY : cnn.c.i
-
-cnn.s: cnn.c.s
-
-.PHONY : cnn.s
-
-# target to generate assembly for a file
-cnn.c.s:
-	$(MAKE) -f CMakeFiles/Version_Convolutionnal.dir/build.make CMakeFiles/Version_Convolutionnal.dir/cnn.c.s
-.PHONY : cnn.c.s
-
 cnn_1.o: cnn_1.c.o
 
 .PHONY : cnn_1.o
@@ -294,9 +267,6 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... Version_Convolutionnal"
 	@echo "... edit_cache"
-	@echo "... cnn.o"
-	@echo "... cnn.i"
-	@echo "... cnn.s"
 	@echo "... cnn_1.o"
 	@echo "... cnn_1.i"
 	@echo "... cnn_1.s"

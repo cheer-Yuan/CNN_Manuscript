@@ -64,6 +64,8 @@ void cnntrain(CNN_1* cnn, ImgArr inputData, LabelArr outputData, CNNOpts opts, i
 
 
             cnnff(cnn, H1inData);  // forward propagation : calculate the error
+
+
             cnnbp(cnn, outputData->LabelPtr[n].LabelData);   // backward propagation : calculate the gradients
             //char* filedir="E:\\Code\\Matlab\\PicTrans\\CNNData\\";
             //const char* filename=combine_strings(filedir,combine_strings(intTochar(n),".cnn"));
@@ -126,10 +128,11 @@ void cnnbp(CNN_1* cnn,float* outputData) // backward propagation
     // O1 layer, calculate sigma deriv
     for(int i = 0; i < cnn->O1->outputNum; ++i) cnn->O1->d[i] = cnn->e[i] * sigma_derivation(cnn->O1->y[i]);
 
-    // H1 layer, calculate sigma deriv
+
+    // H1 layer, calculate sigma deriv // SIGERROR
     for(int j = 0; j < cnn->H1->outputNum; ++j) //j < 30
     {   //i < 10
-        for (int i = 0; i < cnn->H1->outputNum; ++i) cnn->H1->d[j] += cnn->O1->d[i] * cnn->O1->wData[i][j];
+        for (int i = 0; i < cnn->O1->outputNum; ++i) cnn->H1->d[j] += cnn->O1->d[i] * cnn->O1->wData[i][j];
         cnn->H1->d[j] = cnn->H1->d[j] * sigma_derivation(cnn->H1->y[j]);
     }
 }
@@ -143,13 +146,13 @@ float sigma_derivation(float y)
 void cnnapplygrads(CNN_1* cnn, CNNOpts opts, float* inputData) // renew weights in IN -> H1 and H1 -> O1
 {
     //weights IN -> H1
-    for(int i = 0; i < cnn->H1->inputNum; ++i)
-        for(int j = 0; j < cnn->H1->outputNum; ++j)
+    for(int i = 0; i < cnn->H1->outputNum; ++i)
+        for(int j = 0; j < cnn->H1->inputNum; ++j)
             cnn->H1->wData[i][j] = cnn->H1->wData[i][j] + opts.alpha * inputData[i] * cnn->H1->d[j];
 
     //weights H1 -> O1
-    for(int i = 0; i < cnn->O1->inputNum; ++i)
-        for(int j = 0; j < cnn->O1->outputNum; ++j)
+    for(int i = 0; i < cnn->O1->outputNum; ++i)
+        for(int j = 0; j < cnn->O1->inputNum; ++j)
             cnn->O1->wData[i][j] = cnn->O1->wData[i][j] + opts.alpha * cnn->H1->y[i] * cnn->O1->d[j];
 }
 
