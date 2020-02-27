@@ -11,6 +11,13 @@ void cnnsetup_1(CNN_1* cnn, int inputSize, int outputSize)
     cnn->H1 = initnnLayer(16384, inputSize);    //128*128
     cnn->O1 = initnnLayer(inputSize, outputSize);
     cnn->e = (float*)calloc(cnn->H1->outputNum, sizeof(float));
+    for(int i = 0; i < 40; ++i)
+    {
+        for(int j = 0; j < 128 * 128; ++j)
+        {
+            if (isnan(cnn->H1->wData[i][j])) printf("%d, %d\n", i, j);
+        }
+    }
 }
 
 //initialize a fully connected layer
@@ -35,7 +42,7 @@ nnLayer* initnnLayer(int inputNum, int outputNum)
         for(int j = 0; j < inputNum; ++j){
             float randnum = (((float)rand() / (float)RAND_MAX) - 0.5) * 2; //generate a fake random number
             //make the value approching zero : avoid the saturation of the neurons when training
-            nnL->wData[i][j] = randnum * sqrt((float)6.0 / (float)(inputNum + outputNum));
+            nnL->wData[i][j] = randnum * sqrt(fabsf((float)6.0 / (float)(inputNum + outputNum)));
         }
     }
 
@@ -55,15 +62,16 @@ void cnntrain(CNN_1* cnn, ImgArr inputData, LabelArr outputData, CNNOpts opts, i
 
             int outSize = cnn->H1->inputNum;
             nSize H1inSize = {128, 128};
+            /*
             float* H1inData = (float*)malloc((cnn->H1->inputNum) * sizeof(float));
 
             //develop in 1 dimension
             for(int r = 0; r < H1inSize.r; ++r)
                 for(int c = 0; c < H1inSize.c; ++c)
                     H1inData[r * c  + c] = inputData->ImgPtr[n].ImgData[r][c];
+*/
 
-
-            cnnff(cnn, H1inData);  // forward propagation : calculate the error
+            cnnff(cnn, inputData->ImgPtr[n].ImgData);  // forward propagation : calculate the error
 
 
             cnnbp(cnn, outputData->LabelPtr[n].LabelData);   // backward propagation : calculate the gradients
@@ -71,12 +79,31 @@ void cnntrain(CNN_1* cnn, ImgArr inputData, LabelArr outputData, CNNOpts opts, i
             //const char* filename=combine_strings(filedir,combine_strings(intTochar(n),".cnn"));
             //const char* filename = "../cnn.txt";
             //savecnndata(cnn, filename, inputData->ImgPtr[n].ImgData);
-            cnnapplygrads(cnn, opts, H1inData);
-            cnnclear(cnn);
 
-            free(H1inData);
+            cnnapplygrads(cnn, opts, inputData->ImgPtr[n].ImgData);
+            for(int i = 0; i < 40; ++i)
+            {
+                for(int j = 0; j < 128 * 128; ++j)
+                {
+                    if (isnan(cnn->H1->wData[i][j])) printf("%d, %d\n", i, j);
+                }
+            }
+            for(int i = 0; i <  cnn->H1->outputNum; ++i)
+            {
+                printf("%f\t", cnn->H1->y[i]);
+            }
+            printf("\n");
+            for(int i = 0; i <  cnn->O1->outputNum; ++i)
+            {
+                printf("%f\t", cnn->O1->y[i]);
+            }
+            printf("\n");
+
+
+            //free(H1inData);
         }
     }
+
 }
 
 
@@ -84,8 +111,10 @@ void cnntrain(CNN_1* cnn, ImgArr inputData, LabelArr outputData, CNNOpts opts, i
 void cnnff(CNN_1* cnn, float* inputData)
 {
 
+
     nSize nnSize_H1 = {cnn->H1->inputNum, cnn->H1->outputNum}; //forward feeding H1
     nnff(cnn->H1->v, inputData, cnn->H1->wData, cnn->H1->biasData, nnSize_H1);
+
 
     for(int i = 0; i < cnn->H1->outputNum; ++i) //activation H1
         cnn->H1->y[i] = activation_Sigma(cnn->H1->v[i], cnn->H1->biasData[i]);
@@ -96,6 +125,9 @@ void cnnff(CNN_1* cnn, float* inputData)
 
     for(int i = 0; i < cnn->O1->outputNum; ++i) //activation O1
         cnn->O1->y[i] = activation_Sigma(cnn->O1->v[i], cnn->O1->biasData[i]);
+
+
+
 }
 
 //input * wight + bias
@@ -117,8 +149,12 @@ float activation_Sigma(float input,float bas)
 float vecMulti(float* vec1, float* vec2, int vecL)
 {
     float m = 0;
-    for(int i = 0; i < vecL; ++i) m = m + vec1[i] * vec2[i];
+    for(int i = 0; i < vecL; ++i) {
+        m = m + vec1[i] * vec2[i];
+        //printf("%d, %f, %f, %f\n",i,  vec1[i], vec2[i], m);
+    }
     return m;
+
 }
 
 void cnnbp(CNN_1* cnn,float* outputData) // backward propagation
@@ -145,15 +181,16 @@ float sigma_derivation(float y)
 
 void cnnapplygrads(CNN_1* cnn, CNNOpts opts, float* inputData) // renew weights in IN -> H1 and H1 -> O1
 {
+
     //weights IN -> H1
     for(int i = 0; i < cnn->H1->outputNum; ++i)
         for(int j = 0; j < cnn->H1->inputNum; ++j)
-            cnn->H1->wData[i][j] = cnn->H1->wData[i][j] + opts.alpha * inputData[i] * cnn->H1->d[j];
+            cnn->H1->wData[i][j] = cnn->H1->wData[i][j] + opts.alpha * inputData[j] * cnn->H1->d[i];
 
     //weights H1 -> O1
     for(int i = 0; i < cnn->O1->outputNum; ++i)
         for(int j = 0; j < cnn->O1->inputNum; ++j)
-            cnn->O1->wData[i][j] = cnn->O1->wData[i][j] + opts.alpha * cnn->H1->y[i] * cnn->O1->d[j];
+            cnn->O1->wData[i][j] = cnn->O1->wData[i][j] + opts.alpha * cnn->H1->y[j] * cnn->O1->d[i];
 }
 
 // used to test
@@ -273,21 +310,24 @@ float cnntest(CNN_1* cnn, ImgArr inputData, LabelArr outputData, int testNum)
 {
     int incorrectnum = 0;  // false prediction
     for(int n = 0; n < testNum; ++n)
-    {
+    {/*
         nSize H1inSize = {128, 128};
         float* H1inData = (float*)malloc((cnn->H1->inputNum) * sizeof(float));
+
 
         //develop in 1 dimension
         for(int r = 0; r < H1inSize.r; ++r)
             for(int c = 0; c < H1inSize.c; ++c)
                 H1inData[r * c  + c] = inputData->ImgPtr[n].ImgData[r][c];
+        */
 
-        cnnff(cnn, H1inData);
-        for(int i = 0; i <  cnn->O1->outputNum; ++i)
+        cnnff(cnn, inputData->ImgPtr[n].ImgData);
+        for(int j = 0; j < 10; ++j)
         {
-            printf("%f\t", cnn->O1->y[i]);
+            printf("%f\t", cnn->O1->y[j]);
         }
         printf("\n");
+
         if(vecmaxIndex(cnn->O1->y, cnn->O1->outputNum) !=
            vecmaxIndex(outputData->LabelPtr[n].LabelData, cnn->O1->outputNum))
             incorrectnum++;

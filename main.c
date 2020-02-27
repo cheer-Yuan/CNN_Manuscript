@@ -22,28 +22,32 @@ void test_Network_on_O()
     incorrectRatio = cnntest(cnn_Test, testImg, testLabel, testNum);
     printf("test finished!! \nincorrectrate rate = %f\n", incorrectRatio);
 }
+ */
 void test_Network_on_1()
 {
-    ImgArr testImg = read_Img("../train_and_test_0/test_1/");
+    ImgArr testImg = read_Img_1D("../train_and_test_0/test_1/");
     LabelArr testLabel = read_Lable("../train_and_test_0/label_test_1.txt");
 
-    nSize inputSize = {testImg->ImgPtr[0].c,testImg->ImgPtr[0].r};
     int outSize = testLabel->LabelPtr[0].l;
 
-    CNN* cnn_Test = (CNN*)malloc(sizeof(CNN));
-    cnnsetup(cnn_Test,inputSize,outSize);
-    importcnn(cnn_Test, "../train_of_0_1_20.cnn");
+    CNN_1 * cnn_Test = (CNN_1*)malloc(sizeof(CNN_1));
+    cnnsetup_1(cnn_Test,40,outSize);
+    importcnn(cnn_Test, "../train_of_cnn_1_on_0_20.cnn");
+
+
+
     int testNum = 20;
     float incorrectRatio = 0.0;
 
     incorrectRatio = cnntest(cnn_Test, testImg, testLabel, testNum);
     printf("test finished!! \nincorrectrate rate = %f\n", incorrectRatio);
-}
 
+}
+/*
 void test_Network_on_0()
 {
     ImgArr testImg=read_Img("../train_and_test_0/test_0/");
-    LabelArr testLabel=read_Lable("../train_and_test_0/label_test_0.txt");
+    LabelArr testLabel=read_Lablxxe("../train_and_test_0/label_test_0.txt");
 
     nSize inputSize={testImg->ImgPtr[0].c,testImg->ImgPtr[0].r};
     int outSize=testLabel->LabelPtr[0].l;
@@ -175,22 +179,20 @@ void train_o()
 void train_cnn_1()
 {
     //read images
-    ImgArr trainImg_0 = read_Img("../train_and_test_0/train_0/");
-    LabelArr trainLabel_0 = read_Lable("../train_and_test_0/label_train_0.txt");
-
-    nSize inputSize={trainImg_0->ImgPtr[0].c,trainImg_0->ImgPtr[0].r};  //define data size
+    ImgArr trainImg_0 = read_Img_1D("../train_and_test_0/train_1/");
+    LabelArr trainLabel_0 = read_Lable("../train_and_test_0/label_train_1.txt");
 
     int outSize = trainLabel_0->LabelPtr[0].l;
 
     //initializing
     CNN_1* cnn = (CNN_1*)malloc(sizeof(CNN_1));
-    cnnsetup_1(cnn, 30, outSize);
+    cnnsetup_1(cnn, 40, outSize);
 
 
     // train on 0s and 1s
     CNNOpts opts;
-    opts.numepochs = 1;
-    opts.alpha = 1.0;
+    opts.numepochs = 3;
+    opts.alpha = 0.1;
     int trainNum = 1;
     cnntrain(cnn,trainImg_0,trainLabel_0,opts,trainNum);
 
@@ -233,7 +235,7 @@ int main()
     //train_1_2_20_intersect();
     //train_0_o_20();
     //train_o();
-    //test_Network_on_1();
+    test_Network_on_1();
     //test_Network_on_0();
     //test_Network_on_O();
     return 0;

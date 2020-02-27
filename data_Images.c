@@ -12,6 +12,51 @@
 #include "mat.h"
 #include <dirent.h>
 
+ImgArr read_Img_1D(const char* filename)
+{
+    //make a list of all documents
+    struct dirent **namelist;
+
+    int n = scandir(filename, &namelist, 0, alphasort);
+    printf("%d\n", n - 2);  //number of images
+
+
+    // initialize the container of the image
+    int number_of_images = n - 2;   //characteristic of function scandir
+    ImgArr imgarr=(ImgArr)malloc(sizeof(ImgArr));
+    imgarr->ImgNum = number_of_images;
+    imgarr->ImgPtr = (Img_1D*)malloc(number_of_images * sizeof(Img_1D));
+
+    for (int index_Images = 0; index_Images < number_of_images; ++index_Images)
+    {
+
+        //read the file
+        FILE *fp;
+        printf("%s\n", combine_strings(filename, namelist[index_Images + 2]->d_name));
+        fp = fopen(combine_strings(filename, namelist[index_Images + 2]->d_name), "rb+");
+
+        imgarr->ImgPtr[index_Images].r = 128;
+        imgarr->ImgPtr[index_Images].ImgData = (float*) malloc(128 * 128 * sizeof(float));
+        unsigned char* buff = (unsigned char*)malloc(3 * 128 * 128 * sizeof(unsigned char));
+
+
+        fseek(fp, 15, SEEK_CUR);
+        fread((unsigned char*)buff, sizeof(unsigned char), 128 * 128 * 3, fp);
+
+        for(int pixel = 0; pixel < 128 * 128; ++pixel)
+        {
+            if(buff[pixel * 3] == 255) imgarr->ImgPtr[index_Images].ImgData[pixel] = 0.0;
+            else imgarr->ImgPtr[index_Images].ImgData[pixel] = 1.0;
+        }
+
+        free(buff);
+        fclose(fp);
+
+    }
+    free(namelist);
+    return imgarr;
+}
+
 //Image reader
 ImgArr read_Img(const char* filename)
 {
@@ -28,7 +73,7 @@ ImgArr read_Img(const char* filename)
 
     // initialize the container of the image
     int number_of_images = n - 2;   //characteristic of function scandir
-    ImgArr imgarr=(ImgArr)malloc(sizeof(ImgArr));
+    MinstImgArr imgarr=(ImgArr)malloc(sizeof(ImgArr));
     imgarr->ImgNum = number_of_images;
     imgarr->ImgPtr = (MinstImg*)malloc(number_of_images * sizeof(MinstImg));
 
@@ -116,7 +161,7 @@ LabelArr read_Lable(const char* filename)
     assert(fp);
 
     int number_of_labels = 20;  //same value as the number of images
-    int label_long = 3;
+    int label_long = 10;
 
 
     //if the file contains a number of labels, read it (here no)
