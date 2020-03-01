@@ -105,9 +105,6 @@
 		<Unit filename="/home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/rgb2Grayscale.h">
 			<Option target="Version_Convolutionnal"/>
 		</Unit>
-		<Unit filename="/home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/test.c">
-			<Option target="Version_Convolutionnal"/>
-		</Unit>
 		<Unit filename="/home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

@@ -19,6 +19,10 @@ data_Images.h
 /home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/main.c
 data_Images.h
 /home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/data_Images.h
+time.h
+-
+sys/time.h
+-
 mat.h
 /home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/mat.h
 cnn_1.h

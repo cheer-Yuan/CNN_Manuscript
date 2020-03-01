@@ -9,7 +9,6 @@ CMakeFiles/Version_Convolutionnal.dir/cnn_1.c.o: ../mat.h
 CMakeFiles/Version_Convolutionnal.dir/data_Images.c.o: ../data_Images.c
 CMakeFiles/Version_Convolutionnal.dir/data_Images.c.o: ../data_Images.h
 CMakeFiles/Version_Convolutionnal.dir/data_Images.c.o: ../mat.h
-CMakeFiles/Version_Convolutionnal.dir/data_Images.c.o: ../rgb2Grayscale.h
 
 CMakeFiles/Version_Convolutionnal.dir/main.c.o: ../cnn_1.h
 CMakeFiles/Version_Convolutionnal.dir/main.c.o: ../data_Images.h
@@ -18,6 +17,4 @@ CMakeFiles/Version_Convolutionnal.dir/main.c.o: ../mat.h
 
 CMakeFiles/Version_Convolutionnal.dir/mat.c.o: ../mat.c
 CMakeFiles/Version_Convolutionnal.dir/mat.c.o: ../mat.h
-
-CMakeFiles/Version_Convolutionnal.dir/test.c.o: ../test.c
 

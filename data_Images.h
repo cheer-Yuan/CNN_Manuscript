@@ -11,6 +11,7 @@ typedef struct Img_1D
 {
     int r;
     float*  ImgData;    //matrix containing data of the image
+    float* LabelData;
 } Img_1D;
 
 
@@ -45,6 +46,6 @@ LabelArr read_Lable(const char* filename); // read label
 
 ImgArr read_Img(const char* filename); // readimg
 
-ImgArr read_Img_1D(const char* filename); // readimg
+ImgArr read_Img_1D(const char* filename, int switcher); // readimg
 
 #endif //VERSION_CONVOLUTIONNAL_DATA_IMAGES_H

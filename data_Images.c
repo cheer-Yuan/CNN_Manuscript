@@ -3,58 +3,83 @@
 //
 
 #include "data_Images.h"
-
-
+#include <string.h>
 #include <stdio.h>
 #include <assert.h>
 #include <stdlib.h>
-#include "rgb2Grayscale.h"
 #include "mat.h"
 #include <dirent.h>
 
-ImgArr read_Img_1D(const char* filename)
+ImgArr read_Img_1D(const char* filename, int switcher)
 {
-    //make a list of all documents
-    struct dirent **namelist;
+    int images_per_label;
+    if(switcher == 1) images_per_label = 1000;
+    else images_per_label = 100;
+    char label_list[256][8];
+    int len = 0;
+    DIR* d;
+    struct dirent* file;
 
-    int n = scandir(filename, &namelist, 0, alphasort);
-    printf("%d\n", n - 2);  //number of images
+    if(!(d = opendir(filename)))
+    {
+        printf("error opendir %s!!!\n",filename);
+        exit(-1);
+    }
 
+    while((file = readdir(d)) != NULL)
+    {
+        //remove current and precedent location
+        if(strncmp(file->d_name, ".", 1) == 0)
+            continue;
+        strcpy(label_list[len++], file->d_name);
+    }
+    closedir(d);
 
     // initialize the container of the image
-    int number_of_images = n - 2;   //characteristic of function scandir
+    int number_of_images = images_per_label * len;
     ImgArr imgarr=(ImgArr)malloc(sizeof(ImgArr));
     imgarr->ImgNum = number_of_images;
+    printf("%d\n", imgarr->ImgNum);
     imgarr->ImgPtr = (Img_1D*)malloc(number_of_images * sizeof(Img_1D));
 
-    for (int index_Images = 0; index_Images < number_of_images; ++index_Images)
+
+
+    for (int index = 0; index < len; ++index)
     {
+        //make a list of all documents
+        struct dirent **namelist;
 
-        //read the file
-        FILE *fp;
-        printf("%s\n", combine_strings(filename, namelist[index_Images + 2]->d_name));
-        fp = fopen(combine_strings(filename, namelist[index_Images + 2]->d_name), "rb+");
+        int n = scandir(combine_strings(combine_strings(filename, label_list[index]), "/"),
+                &namelist, 0, alphasort);
 
-        imgarr->ImgPtr[index_Images].r = 128;
-        imgarr->ImgPtr[index_Images].ImgData = (float*) malloc(128 * 128 * sizeof(float));
-        unsigned char* buff = (unsigned char*)malloc(3 * 128 * 128 * sizeof(unsigned char));
-
-
-        fseek(fp, 15, SEEK_CUR);
-        fread((unsigned char*)buff, sizeof(unsigned char), 128 * 128 * 3, fp);
-
-        for(int pixel = 0; pixel < 128 * 128; ++pixel)
+        for(int image = 0; image < images_per_label; ++image)
         {
-            if(buff[pixel * 3] == 255) imgarr->ImgPtr[index_Images].ImgData[pixel] = 0.0;
-            else imgarr->ImgPtr[index_Images].ImgData[pixel] = 1.0;
+            FILE* fp;
+            fp = fopen(combine_strings(combine_strings(combine_strings(filename, label_list[index]), "/"),
+                                       namelist[image + 2]->d_name), "rb+");
+
+            imgarr->ImgPtr[index * images_per_label + image].r = 128;
+            imgarr->ImgPtr[index * images_per_label + image].ImgData = (float*) malloc(128 * 128 * sizeof(float));
+            imgarr->ImgPtr[index * images_per_label + image].LabelData = (float*) calloc(len, sizeof(float));
+            imgarr->ImgPtr[index * images_per_label + image].LabelData[atoi(label_list[index]) % 10] = 1.0;
+            unsigned char* buff = (unsigned char*)malloc(3 * 128 * 128 * sizeof(unsigned char));
+
+
+            fseek(fp, 15, SEEK_CUR);
+            fread((unsigned char*)buff, sizeof(unsigned char), 128 * 128 * 3, fp);
+;
+            for(int pixel = 0; pixel < 128 * 128; ++pixel)
+            {   //normalisation
+                if(buff[pixel * 3] == 255) imgarr->ImgPtr[index * images_per_label + image].ImgData[pixel] = 0.01;
+                else imgarr->ImgPtr[index * images_per_label + image].ImgData[pixel] = 1.0;
+            }
+
+            free(buff);
+            fclose(fp);
         }
-
-        free(buff);
-        fclose(fp);
-
+        free(namelist);
     }
-    free(namelist);
-    return imgarr;
+   return imgarr;
 }
 
 //Image reader

@@ -11,13 +11,6 @@ void cnnsetup_1(CNN_1* cnn, int inputSize, int outputSize)
     cnn->H1 = initnnLayer(16384, inputSize);    //128*128
     cnn->O1 = initnnLayer(inputSize, outputSize);
     cnn->e = (float*)calloc(cnn->H1->outputNum, sizeof(float));
-    for(int i = 0; i < 40; ++i)
-    {
-        for(int j = 0; j < 128 * 128; ++j)
-        {
-            if (isnan(cnn->H1->wData[i][j])) printf("%d, %d\n", i, j);
-        }
-    }
 }
 
 //initialize a fully connected layer
@@ -52,7 +45,7 @@ nnLayer* initnnLayer(int inputNum, int outputNum)
 }
 
 //main function of the training
-void cnntrain(CNN_1* cnn, ImgArr inputData, LabelArr outputData, CNNOpts opts, int trainNum)
+void cnntrain(CNN_1* cnn, ImgArr inputData, CNNOpts opts, int trainNum)
 {
     for(int e = 0;e<opts.numepochs;e++){
         printf("Epoch num : %d\n", e + 1);
@@ -74,13 +67,14 @@ void cnntrain(CNN_1* cnn, ImgArr inputData, LabelArr outputData, CNNOpts opts, i
             cnnff(cnn, inputData->ImgPtr[n].ImgData);  // forward propagation : calculate the error
 
 
-            cnnbp(cnn, outputData->LabelPtr[n].LabelData);   // backward propagation : calculate the gradients
+            cnnbp(cnn, inputData->ImgPtr[n].LabelData);   // backward propagation : calculate the gradients
             //char* filedir="E:\\Code\\Matlab\\PicTrans\\CNNData\\";
             //const char* filename=combine_strings(filedir,combine_strings(intTochar(n),".cnn"));
             //const char* filename = "../cnn.txt";
             //savecnndata(cnn, filename, inputData->ImgPtr[n].ImgData);
 
             cnnapplygrads(cnn, opts, inputData->ImgPtr[n].ImgData);
+            /*
             for(int i = 0; i < 40; ++i)
             {
                 for(int j = 0; j < 128 * 128; ++j)
@@ -98,8 +92,7 @@ void cnntrain(CNN_1* cnn, ImgArr inputData, LabelArr outputData, CNNOpts opts, i
                 printf("%f\t", cnn->O1->y[i]);
             }
             printf("\n");
-
-
+            */
             //free(H1inData);
         }
     }
@@ -139,9 +132,9 @@ void nnff(float* output, float* input, float** wdata, float* bias, nSize nnSize)
 }
 
 // activation function sigmod
-float activation_Sigma(float input,float bas)
+float activation_Sigma(float input,float biaas)
 {
-    float temp=input+bas;
+    float temp = input + biaas;
     return (float)1.0 / ((float)(1.0 + exp( - temp)));
 }
 
@@ -165,7 +158,7 @@ void cnnbp(CNN_1* cnn,float* outputData) // backward propagation
     for(int i = 0; i < cnn->O1->outputNum; ++i) cnn->O1->d[i] = cnn->e[i] * sigma_derivation(cnn->O1->y[i]);
 
 
-    // H1 layer, calculate sigma deriv // SIGERROR
+    // H1 layer, calculate sigma deriv
     for(int j = 0; j < cnn->H1->outputNum; ++j) //j < 30
     {   //i < 10
         for (int i = 0; i < cnn->O1->outputNum; ++i) cnn->H1->d[j] += cnn->O1->d[i] * cnn->O1->wData[i][j];
@@ -176,7 +169,7 @@ void cnnbp(CNN_1* cnn,float* outputData) // backward propagation
 //derive of stigma
 float sigma_derivation(float y)
 {
-    return y*(1-y);
+    return activation_Sigma(y, 0) * (1 - activation_Sigma(y, 0));
 }
 
 void cnnapplygrads(CNN_1* cnn, CNNOpts opts, float* inputData) // renew weights in IN -> H1 and H1 -> O1
@@ -306,7 +299,7 @@ int vecmaxIndex(float* vec, int veclength )//retern the max index
 
 
 // test the network after predict
-float cnntest(CNN_1* cnn, ImgArr inputData, LabelArr outputData, int testNum)
+float cnntest(CNN_1* cnn, ImgArr inputData, int testNum)
 {
     int incorrectnum = 0;  // false prediction
     for(int n = 0; n < testNum; ++n)
@@ -327,9 +320,8 @@ float cnntest(CNN_1* cnn, ImgArr inputData, LabelArr outputData, int testNum)
             printf("%f\t", cnn->O1->y[j]);
         }
         printf("\n");
-
         if(vecmaxIndex(cnn->O1->y, cnn->O1->outputNum) !=
-           vecmaxIndex(outputData->LabelPtr[n].LabelData, cnn->O1->outputNum))
+           vecmaxIndex(inputData->ImgPtr[n].LabelData, cnn->O1->outputNum))
             incorrectnum++;
         cnnclear(cnn);
     }

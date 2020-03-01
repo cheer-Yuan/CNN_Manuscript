@@ -42,7 +42,7 @@ void cnnsetup_1(CNN_1* cnn, int inputsize, int outputSize);
 
 nnLayer* initnnLayer(int inputNum, int outputNum);
 
-void cnntrain(CNN_1* cnn, ImgArr inputData, LabelArr outputData, CNNOpts opts, int trainNum);
+void cnntrain(CNN_1* cnn, ImgArr inputData, CNNOpts opts, int trainNum);
 
 void cnnff(CNN_1* cnn, float* inputData);
 
@@ -66,7 +66,7 @@ void savecnn(CNN_1* cnn, const char* filename);
 
 void importcnn(CNN_1* cnn, const char* filename);
 
-float cnntest(CNN_1* cnn, ImgArr inputData, LabelArr outputData, int testNum);
+float cnntest(CNN_1* cnn, ImgArr inputData, int testNum);
 
 
 #endif //VERSION_CONVOLUTIONNAL_CNN_1_H

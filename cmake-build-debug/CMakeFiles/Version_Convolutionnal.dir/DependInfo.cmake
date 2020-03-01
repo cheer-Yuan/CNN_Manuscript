@@ -8,7 +8,6 @@ set(CMAKE_DEPENDS_CHECK_C
   "/home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/data_Images.c" "/home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/cmake-build-debug/CMakeFiles/Version_Convolutionnal.dir/data_Images.c.o"
   "/home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/main.c" "/home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/cmake-build-debug/CMakeFiles/Version_Convolutionnal.dir/main.c.o"
   "/home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/mat.c" "/home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/cmake-build-debug/CMakeFiles/Version_Convolutionnal.dir/mat.c.o"
-  "/home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/test.c" "/home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/cmake-build-debug/CMakeFiles/Version_Convolutionnal.dir/test.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 
