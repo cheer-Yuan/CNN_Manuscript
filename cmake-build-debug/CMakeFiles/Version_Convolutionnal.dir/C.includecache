@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+/home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/cnn_1.c
+cnn_1.h
+/home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/cnn_1.h
+
 /home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/cnn_1.h
 stdbool.h
 -
@@ -13,6 +17,22 @@ mat.h
 /home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/mat.h
 data_Images.h
 /home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/data_Images.h
+
+/home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/data_Images.c
+data_Images.h
+/home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/data_Images.h
+string.h
+-
+stdio.h
+-
+assert.h
+-
+stdlib.h
+-
+mat.h
+/home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/mat.h
+dirent.h
+-
 
 /home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/data_Images.h
 

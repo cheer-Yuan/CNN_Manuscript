@@ -31,11 +31,16 @@ void test_Network_1_on_all()
 void train_cnn_1()
 {
     //read images
+    struct timeval start_read, end_read;
+    gettimeofday(&start_read, NULL );
     ImgArr trainImg = read_Img_1D("../../../Dataset/train/", 1);
+    gettimeofday(&end_read, NULL );
+    long timeuse_read =1000000 * ( end_read.tv_sec - start_read.tv_sec ) + end_read.tv_usec - start_read.tv_usec;
+    printf("time for reading : %f\n", timeuse_read /1000000.0);
 
 
     int outSize = 10;
-    struct timeval start, end;
+
 
     //initializing
     CNN_1* cnn = (CNN_1*)malloc(sizeof(CNN_1));
@@ -46,6 +51,7 @@ void train_cnn_1()
     opts.alpha = 0.0001;
     int trainNum = trainImg->ImgNum;
 
+    struct timeval start, end;
     gettimeofday(&start, NULL );
     cnntrain(cnn, trainImg, opts, trainNum);
     gettimeofday(&end, NULL );

@@ -39,7 +39,7 @@ ImgArr read_Img_1D(const char* filename, int switcher)
     int number_of_images = images_per_label * len;
     ImgArr imgarr=(ImgArr)malloc(sizeof(ImgArr));
     imgarr->ImgNum = number_of_images;
-    printf("%d\n", imgarr->ImgNum);
+    //printf("%d\n", imgarr->ImgNum);
     imgarr->ImgPtr = (Img_1D*)malloc(number_of_images * sizeof(Img_1D));
 
 

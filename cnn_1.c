@@ -51,7 +51,7 @@ void cnntrain(CNN_1* cnn, ImgArr inputData, CNNOpts opts, int trainNum)
         printf("Epoch num : %d\n", e + 1);
         for(int n = 0; n < trainNum; ++n)
         {
-            printf("Training num : %d\n", n + 1);
+            //printf("Training num : %d\n", n + 1);
 
             int outSize = cnn->H1->inputNum;
             nSize H1inSize = {128, 128};
@@ -314,12 +314,14 @@ float cnntest(CNN_1* cnn, ImgArr inputData, int testNum)
                 H1inData[r * c  + c] = inputData->ImgPtr[n].ImgData[r][c];
         */
 
-        cnnff(cnn, inputData->ImgPtr[n].ImgData);
-        for(int j = 0; j < 10; ++j)
-        {
-            printf("%f\t", cnn->O1->y[j]);
-        }
-        printf("\n");
+
+//        cnnff(cnn, inputData->ImgPtr[n].ImgData);
+//        for(int j = 0; j < 10; ++j)
+//        {
+//            printf("%f\t", cnn->O1->y[j]);
+//        }
+//        printf("\n");
+
         if(vecmaxIndex(cnn->O1->y, cnn->O1->outputNum) !=
            vecmaxIndex(inputData->ImgPtr[n].LabelData, cnn->O1->outputNum))
             incorrectnum++;
