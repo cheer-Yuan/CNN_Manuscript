@@ -7,3 +7,8 @@ features :
   -PNG 2 PPM : OK
   -reader P6 RGB PPM : OK
   -RGB 2 GS : OK
+  
+  
+Version 1.0:
+
+Adding mpi functions
