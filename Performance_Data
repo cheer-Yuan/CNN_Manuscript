@@ -1,5 +1,11 @@
 Intel(R) Core(TM) i5-7200U CPU @ 2.50GHz
 
+
+old version :
+time for reading : 11.663354 for 20 files ==> 5831.675 seconds for 10000 files
+time for training : 25.784059 for 20 files ==> 12892.03 seconds for 10000 files
+
+new version :
 train epoch : 5
 nodes in hidden layer : 30
 
@@ -53,9 +59,16 @@ time for reading : 1.314524		for 10000 samples
 incorrectrate rate = 0.709000
 
 
+3 layer 100 neurons version :
 
-
-
-old version :
-time for reading : 11.663354 for 20 files ==> 5831.675 seconds for 10000 files
-time for training : 25.784059 for 20 files ==> 12892.03 seconds for 10000 files
+incorrectrate rate = 0.900000
+time for reading : 0.540766
+Epoch num : 1
+Epoch num : 2
+Epoch num : 3
+Epoch num : 4
+Epoch num : 5
+train finished!!
+train epoch : 5
+nodes in hidden layer : 100
+time for training : 146.279672

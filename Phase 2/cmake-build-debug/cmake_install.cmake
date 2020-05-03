@@ -1,4 +1,4 @@
-# Install script for directory: /home/cheerfulliu/Desktop/Version_Convolutionnal
+# Install script for directory: /home/cheerfulliu/Desktop/10000trainning0-9_sigmoid_3Hiddenlayer_100Neurons
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

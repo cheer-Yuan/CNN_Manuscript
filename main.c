@@ -5,14 +5,12 @@
 
 #include "cnn_1.h"
 
-#define Nodes_1 30
+#define Nodes_1 1000
+#define outSize 10
 
 void test_Network_1_on_all()
 {
     ImgArr testImg = read_Img_1D("../../../Dataset/test/", 0);
-
-
-    int outSize = 10;
 
     CNN_1 * cnn_Test = (CNN_1*)malloc(sizeof(CNN_1));
     cnnsetup_1(cnn_Test,Nodes_1,outSize);
@@ -38,17 +36,13 @@ void train_cnn_1()
     long timeuse_read =1000000 * ( end_read.tv_sec - start_read.tv_sec ) + end_read.tv_usec - start_read.tv_usec;
     printf("time for reading : %f\n", timeuse_read /1000000.0);
 
-
-    int outSize = 10;
-
-
     //initializing
     CNN_1* cnn = (CNN_1*)malloc(sizeof(CNN_1));
     cnnsetup_1(cnn, Nodes_1, outSize);
 
     CNNOpts opts;
-    opts.numepochs = 5;
-    opts.alpha = 0.0001;
+    opts.numepochs = 1;
+    opts.alpha = 0.01;
     int trainNum = trainImg->ImgNum;
 
     struct timeval start, end;

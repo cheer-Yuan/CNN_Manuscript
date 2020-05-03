@@ -28,6 +28,8 @@ typedef struct cnn_network_neurons_1
 {
     int layerNum;
     nnLayer* H1;
+    nnLayer* H2;
+    nnLayer* H3;
     nnLayer* O1;
     float* e; // error of training
 } CNN_1  ;
@@ -58,7 +60,7 @@ float sigma_derivation(float y);
 
 void cnnapplygrads(CNN_1* cnn, CNNOpts opts, float* inputData); // renew weights in IN -> H1 and H1 -> O1
 
-void savecnndata(CNN_1* cnn, const char* filename, float* inputdata); // save data in the network
+//void savecnndata(CNN_1* cnn, const char* filename, float* inputdata); // save data in the network
 
 void cnnclear(CNN_1* cnn);
 

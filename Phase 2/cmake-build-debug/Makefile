@@ -111,7 +111,7 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named Version_Convolutionnal
+# Target rules for targets named 10000trainning0-9_sigmoid_3Hiddenlayer_100Neurons
 
 # Build rule for target.
 Version_Convolutionnal: cmake_check_build_system

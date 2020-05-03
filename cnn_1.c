@@ -1,4 +1,4 @@
-    //
+        //
 // Created by cheerfulliu on 04/02/2020.
 //
 
@@ -7,8 +7,10 @@
 //setup a nn 1 hidden layer 1 out layer, inputsize OF HIDDEN LAYER and outputsize of NUMBER OF CLASS
 void cnnsetup_1(CNN_1* cnn, int inputSize, int outputSize)
 {
-    cnn->layerNum = 2;
+    cnn->layerNum = 3;
     cnn->H1 = initnnLayer(16384, inputSize);    //128*128
+    cnn->H2 = initnnLayer(inputSize, inputSize);
+    cnn->H3 = initnnLayer(inputSize, inputSize);
     cnn->O1 = initnnLayer(inputSize, outputSize);
     cnn->e = (float*)calloc(cnn->H1->outputNum, sizeof(float));
 }
@@ -103,24 +105,33 @@ void cnntrain(CNN_1* cnn, ImgArr inputData, CNNOpts opts, int trainNum)
 // forward propagation
 void cnnff(CNN_1* cnn, float* inputData)
 {
-
-
     nSize nnSize_H1 = {cnn->H1->inputNum, cnn->H1->outputNum}; //forward feeding H1
     nnff(cnn->H1->v, inputData, cnn->H1->wData, cnn->H1->biasData, nnSize_H1);
-
 
     for(int i = 0; i < cnn->H1->outputNum; ++i) //activation H1
         cnn->H1->y[i] = activation_Sigma(cnn->H1->v[i], cnn->H1->biasData[i]);
 
+    
+    nSize nnSize_H2 = {cnn->H2->inputNum, cnn->H2->outputNum}; //forward feeding H2
+    nnff(cnn->H2->v, cnn->H1->y, cnn->H2->wData, cnn->H2->biasData, nnSize_H2);
+
+    for(int i = 0; i < cnn->H2->outputNum; ++i) //activation H2
+        cnn->H2->y[i] = activation_Sigma(cnn->H2->v[i], cnn->H2->biasData[i]);
+
+
+    nSize nnSize_H3 = {cnn->H3->inputNum, cnn->H3->outputNum}; //forward feeding H3
+    nnff(cnn->H3->v, cnn->H2->y, cnn->H3->wData, cnn->H3->biasData, nnSize_H3);
+
+    for(int i = 0; i < cnn->H3->outputNum; ++i) //activation H3
+        cnn->H3->y[i] = activation_Sigma(cnn->H3->v[i], cnn->H3->biasData[i]);
+    
+
     nSize nnSize_O1 = {cnn->O1->inputNum, cnn->O1->outputNum}; //forward feeding O1
-    nnff(cnn->O1->v, cnn->H1->y, cnn->O1->wData, cnn->O1->biasData, nnSize_O1);
-    //v : output of dotpro; y : input of dotpro  wData: [i][j] i = size of O1 j: size of H1
+    nnff(cnn->O1->v, cnn->H3->y, cnn->O1->wData, cnn->O1->biasData, nnSize_O1);
+    //v : output of dotpro; y : input of dotpro  wData: [i][j] i = size of O1 j: size of H3
 
     for(int i = 0; i < cnn->O1->outputNum; ++i) //activation O1
         cnn->O1->y[i] = activation_Sigma(cnn->O1->v[i], cnn->O1->biasData[i]);
-
-
-
 }
 
 //input * wight + bias
@@ -157,11 +168,24 @@ void cnnbp(CNN_1* cnn,float* outputData) // backward propagation
     // O1 layer, calculate sigma deriv
     for(int i = 0; i < cnn->O1->outputNum; ++i) cnn->O1->d[i] = cnn->e[i] * sigma_derivation(cnn->O1->y[i]);
 
+    // H3 layer, calculate sigma deriv
+    for(int j = 0; j < cnn->H3->outputNum; ++j) //j < 30
+    {   //i < 10
+        for (int i = 0; i < cnn->O1->outputNum; ++i) cnn->H3->d[j] += cnn->O1->d[i] * cnn->O1->wData[i][j];
+        cnn->H3->d[j] = cnn->H3->d[j] * sigma_derivation(cnn->H3->y[j]);
+    }
+
+    // H2 layer, calculate sigma deriv
+    for(int j = 0; j < cnn->H2->outputNum; ++j) //j < 30
+    {   //i < 10
+        for (int i = 0; i < cnn->H3->outputNum; ++i) cnn->H2->d[j] += cnn->H3->d[i] * cnn->H3->wData[i][j];
+        cnn->H2->d[j] = cnn->H2->d[j] * sigma_derivation(cnn->H2->y[j]);
+    }
 
     // H1 layer, calculate sigma deriv
     for(int j = 0; j < cnn->H1->outputNum; ++j) //j < 30
     {   //i < 10
-        for (int i = 0; i < cnn->O1->outputNum; ++i) cnn->H1->d[j] += cnn->O1->d[i] * cnn->O1->wData[i][j];
+        for (int i = 0; i < cnn->H2->outputNum; ++i) cnn->H1->d[j] += cnn->H2->d[i] * cnn->H2->wData[i][j];
         cnn->H1->d[j] = cnn->H1->d[j] * sigma_derivation(cnn->H1->y[j]);
     }
 }
@@ -180,54 +204,74 @@ void cnnapplygrads(CNN_1* cnn, CNNOpts opts, float* inputData) // renew weights 
         for(int j = 0; j < cnn->H1->inputNum; ++j)
             cnn->H1->wData[i][j] = cnn->H1->wData[i][j] + opts.alpha * inputData[j] * cnn->H1->d[i];
 
-    //weights H1 -> O1
+    //weights H1 -> H2
+    for(int i = 0; i < cnn->H2->outputNum; ++i)
+        for(int j = 0; j < cnn->H2->inputNum; ++j)
+            cnn->H2->wData[i][j] = cnn->H2->wData[i][j] + opts.alpha * cnn->H1->y[j] * cnn->H2->d[i];
+
+    //weights H2 -> H3
+    for(int i = 0; i < cnn->H3->outputNum; ++i)
+        for(int j = 0; j < cnn->H3->inputNum; ++j)
+            cnn->H3->wData[i][j] = cnn->H3->wData[i][j] + opts.alpha * cnn->H2->y[j] * cnn->H3->d[i];
+
+    //weights H3 -> O1
     for(int i = 0; i < cnn->O1->outputNum; ++i)
         for(int j = 0; j < cnn->O1->inputNum; ++j)
-            cnn->O1->wData[i][j] = cnn->O1->wData[i][j] + opts.alpha * cnn->H1->y[j] * cnn->O1->d[i];
+            cnn->O1->wData[i][j] = cnn->O1->wData[i][j] + opts.alpha * cnn->H3->y[j] * cnn->O1->d[i];
 }
 
-// used to test
-void savecnndata(CNN_1* cnn, const char* filename, float* inputdata) // save data in the network
-{
-    FILE  *fp = NULL;
-    fp = fopen(filename,"wb");
-    if(fp == NULL)
-        printf("write file failed\n");
-
-    // H1 layer
-    for(int i = 0; i < cnn->H1->outputNum; ++i)
-        fwrite(cnn->H1->wData[i], sizeof(float), cnn->H1->inputNum, fp);
-    fwrite(cnn->H1->biasData,sizeof(float),cnn->H1->outputNum,fp);
-    fwrite(cnn->H1->v, sizeof(float), cnn->H1->outputNum, fp);
-    fwrite(cnn->H1->d, sizeof(float), cnn->H1->outputNum, fp);
-    fwrite(cnn->H1->y, sizeof(float), cnn->H1->outputNum, fp);
-    
-    //O1 layer
-    for(int i = 0; i < cnn->O1->outputNum; ++i)
-        fwrite(cnn->O1->wData[i], sizeof(float), cnn->O1->inputNum, fp);
-    fwrite(cnn->O1->biasData,sizeof(float),cnn->O1->outputNum,fp);
-    fwrite(cnn->O1->v, sizeof(float), cnn->O1->outputNum, fp);
-    fwrite(cnn->O1->d, sizeof(float), cnn->O1->outputNum, fp);
-    fwrite(cnn->O1->y, sizeof(float), cnn->O1->outputNum, fp);
-    
-    fclose(fp);
-}
+//// used to test
+//void savecnndata(CNN_1* cnn, const char* filename, float* inputdata) // save data in the network
+//{
+//    FILE  *fp = NULL;
+//    fp = fopen(filename,"wb");
+//    if(fp == NULL)
+//        printf("write file failed\n");
+//
+//    // H1 layer
+//    for(int i = 0; i < cnn->H1->outputNum; ++i)
+//        fwrite(cnn->H1->wData[i], sizeof(float), cnn->H1->inputNum, fp);
+//    fwrite(cnn->H1->biasData,sizeof(float),cnn->H1->outputNum,fp);
+//    fwrite(cnn->H1->v, sizeof(float), cnn->H1->outputNum, fp);
+//    fwrite(cnn->H1->d, sizeof(float), cnn->H1->outputNum, fp);
+//    fwrite(cnn->H1->y, sizeof(float), cnn->H1->outputNum, fp);
+//    
+//    //O1 layer
+//    for(int i = 0; i < cnn->O1->outputNum; ++i)
+//        fwrite(cnn->O1->wData[i], sizeof(float), cnn->O1->inputNum, fp);
+//    fwrite(cnn->O1->biasData,sizeof(float),cnn->O1->outputNum,fp);
+//    fwrite(cnn->O1->v, sizeof(float), cnn->O1->outputNum, fp);
+//    fwrite(cnn->O1->d, sizeof(float), cnn->O1->outputNum, fp);
+//    fwrite(cnn->O1->y, sizeof(float), cnn->O1->outputNum, fp);
+//    
+//    fclose(fp);
+//}
 
 void cnnclear(CNN_1* cnn)
 {
-
-    // clear H1
     for(int i = 0; i < cnn->H1->outputNum; ++i)
     {
         cnn->H1->d[i] = (float)0.0;
         cnn->H1->v[i] = (float)0.0;
         cnn->H1->y[i] = (float)0.0;
     }
+    for(int i = 0; i < cnn->H2->outputNum; ++i)
+    {
+        cnn->H2->d[i] = (float)0.0;
+        cnn->H2->v[i] = (float)0.0;
+        cnn->H2->y[i] = (float)0.0;
+    }
+    for(int i = 0; i < cnn->H3->outputNum; ++i)
+    {
+        cnn->H3->d[i] = (float)0.0;
+        cnn->H3->v[i] = (float)0.0;
+        cnn->H3->y[i] = (float)0.0;
+    }
     for(int i = 0; i < cnn->O1->outputNum; ++i)
     {
-        cnn->H1->d[i] = (float)0.0;
-        cnn->H1->v[i] = (float)0.0;
-        cnn->H1->y[i] = (float)0.0;
+        cnn->O1->d[i] = (float)0.0;
+        cnn->O1->v[i] = (float)0.0;
+        cnn->O1->y[i] = (float)0.0;
     }
 }
 
@@ -243,6 +287,16 @@ void savecnn(CNN_1* cnn, const char* filename)
     for(int i = 0; i < cnn->H1->outputNum; ++i)
         fwrite(cnn->H1->wData[i], sizeof(float), cnn->H1->inputNum, fp);
     fwrite(cnn->H1->biasData, sizeof(float), cnn->H1->outputNum, fp);
+
+    // H2 layer
+    for(int i = 0; i < cnn->H2->outputNum; ++i)
+        fwrite(cnn->H2->wData[i], sizeof(float), cnn->H2->inputNum, fp);
+    fwrite(cnn->H2->biasData, sizeof(float), cnn->H2->outputNum, fp);
+
+    // H3 layer
+    for(int i = 0; i < cnn->H3->outputNum; ++i)
+        fwrite(cnn->H3->wData[i], sizeof(float), cnn->H3->inputNum, fp);
+    fwrite(cnn->H3->biasData, sizeof(float), cnn->H3->outputNum, fp);
     
     //O1 layer
     for(int i = 0; i < cnn->O1->outputNum; ++i)
@@ -270,6 +324,22 @@ void importcnn(CNN_1* cnn, const char* filename)
 
     for(int i = 0; i<cnn->H1->outputNum; ++i)
         fread(&cnn->H1->biasData[i], sizeof(float),1, fp);
+
+    // H2 layer
+    for(int i = 0; i<cnn->H2->outputNum; ++i)
+        for(int j = 0; j<cnn->H2->inputNum; ++j)
+            fread(&cnn->H2->wData[i][j], sizeof(float),1, fp);
+
+    for(int i = 0; i<cnn->H2->outputNum; ++i)
+        fread(&cnn->H2->biasData[i], sizeof(float),1, fp);
+
+    // H3 layer
+    for(int i = 0; i<cnn->H3->outputNum; ++i)
+        for(int j = 0; j<cnn->H3->inputNum; ++j)
+            fread(&cnn->H3->wData[i][j], sizeof(float),1, fp);
+
+    for(int i = 0; i<cnn->H3->outputNum; ++i)
+        fread(&cnn->H3->biasData[i], sizeof(float),1, fp);
 
     // O1 layer
     for(int i = 0; i<cnn->O1->outputNum; ++i)
@@ -315,12 +385,12 @@ float cnntest(CNN_1* cnn, ImgArr inputData, int testNum)
         */
 
 
-//        cnnff(cnn, inputData->ImgPtr[n].ImgData);
-//        for(int j = 0; j < 10; ++j)
-//        {
-//            printf("%f\t", cnn->O1->y[j]);
-//        }
-//        printf("\n");
+        cnnff(cnn, inputData->ImgPtr[n].ImgData);
+        for(int j = 0; j < 10; ++j)
+        {
+            printf("%f\t", cnn->O1->y[j]);
+        }
+        printf("\n");
 
         if(vecmaxIndex(cnn->O1->y, cnn->O1->outputNum) !=
            vecmaxIndex(inputData->ImgPtr[n].LabelData, cnn->O1->outputNum))
