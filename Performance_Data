@@ -8,6 +8,7 @@ time for training : 25.784059 for 20 files ==> 12892.03 seconds for 10000 files
 new version :
 train epoch : 5
 nodes in hidden layer : 30
+leaning rate : 0.0001
 
 time for training : 41.580465,		= 8.316 / epoch for 10000 samples
 time for reading : 1.314524		for 10000 samples
@@ -72,3 +73,44 @@ train finished!!
 train epoch : 5
 nodes in hidden layer : 100
 time for training : 146.279672
+
+
+time for reading : 0.558622
+Epoch num : 1
+train finished!!
+train epoch : 1
+nodes in hidden layer : 1000
+time for training : 368.7222670.001178
+number of hidden layers : 3
+learning rate : 0.01
+0.001178    0.000129    0.000216    0.998501    0.000148    0.000164    0.000422    0.000284    0.000582    0.000190
+0.001178    0.000128    0.000216    0.998499    0.000149    0.000164    0.000424    0.000287    0.000589    0.000189
+test finished!!
+incorrectrate rate = 0.900000
+
+
+
+time for reading : 4.490413
+Epoch num : 1
+Epoch num : 2
+Epoch num : 3
+train epoch : 3
+nodes in hidden layer : 1000
+time for training : 1095.311340
+lr : 0.0001
+incorrectrate rate = 0.900000
+
+
+
+Epoch num : 9
+Epoch num : 10
+train finished!!
+train epoch : 10
+nodes in hidden layer : 1000
+time for training : 3648.010459
+0.154531	0.015591	0.028235	0.708119	0.016928	0.021039	0.048312	0.036853	0.074262	0.024341
+0.154248	0.015706	0.028212	0.709248	0.016888	0.021077	0.048217	0.036903	0.074140	0.024213
+0.154485	0.015590	0.028363	0.707563	0.017026	0.021067	0.048539	0.037130	0.073709	0.024127
+test finished!!
+incorrectrate rate = 0.900000
+lr : 0.0001

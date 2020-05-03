@@ -313,10 +313,7 @@ void importcnn(CNN_1* cnn, const char* filename)
     fp = fopen(filename,"rb");
     if(fp == NULL)
         printf("write file failed\n");
-    
-    // wait to be revised
-    
-    
+
     // H1 layer
     for(int i = 0; i<cnn->H1->outputNum; ++i)
         for(int j = 0; j<cnn->H1->inputNum; ++j)
