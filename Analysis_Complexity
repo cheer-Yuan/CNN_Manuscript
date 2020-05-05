@@ -1,0 +1,42 @@
+Suppose that the network is composed by m layers, each layer is composed by n nodes :
+
+Activation funciton : sigmoid ,
+	SIG = 2 additions , 1 division and 1 exponential with negative
+	SIGDEV = 5 additions, 2 divisions , 1 multiplications and 2 exponential with negative
+
+Complexity of cnnff :
+
+	first hidden layer of n nodes :
+		128 * 128 * n multiplications in vector, possible for parallelization;
+		n additions
+		n SIG
+
+	middle layers :
+		(m - 1) * n * n multiplications, also possible for parallelization ;
+		(m - 1) * n additions
+		(m - 1) * n SIG
+
+	last layer :
+		n * 10 multiplications and additions, also possible for parallelization
+		10 SIG
+
+
+cnnbp :
+
+	output layer : 10 * ( 1 addition + 1 multiplications + 1 SIGDEV)
+
+	last hidden layer : n * 10 additions and SIGDEV, 2 * n * 10 multiplications
+
+	middle layers : (m - 1) * n * n additions and SIGDEV, (m - 1) * 2 * n * 10 multiplications
+
+cnnapplygrads :
+
+	first hidden layer of n nodes :
+		128 * 128 * n * 2 multiplications, 128 * 128 * n additions
+
+	middle layers :
+		(m - 1) * n * n * 2 multiplications, (m - 1) * n * n additions
+
+	last layer :
+		n * 10 * 2 multiplications, n * 10 additions
+

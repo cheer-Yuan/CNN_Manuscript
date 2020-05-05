@@ -42,7 +42,7 @@ void train_cnn_1()
     importcnn(cnn, "../train_of_cnn_1_on_numbers.cnn");
 
     CNNOpts opts;
-    opts.numepochs = 10;
+    opts.numepochs = 1;
     opts.alpha = 0.0001;
     int trainNum = trainImg->ImgNum;
 
