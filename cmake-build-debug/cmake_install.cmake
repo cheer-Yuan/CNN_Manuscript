@@ -1,4 +1,4 @@
-# Install script for directory: /home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript
+# Install script for directory: /home/cheerfulliu/Desktop/Version_Temporary/CNN_Manuscript
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/cheerfulliu/Desktop/Version_Temporary/CNN_Manuscript/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

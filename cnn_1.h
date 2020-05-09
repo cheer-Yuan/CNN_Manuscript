@@ -9,6 +9,8 @@
 #include "mat.h"
 #include "data_Images.h"
 
+
+
 typedef struct nn_layer
 {
     int inputNum;   //number of input data
@@ -67,6 +69,8 @@ void savecnn(CNN_1* cnn, const char* filename);
 void importcnn(CNN_1* cnn, const char* filename);
 
 float cnntest(CNN_1* cnn, ImgArr inputData, int testNum);
+
+
 
 
 #endif //VERSION_CONVOLUTIONNAL_CNN_1_H

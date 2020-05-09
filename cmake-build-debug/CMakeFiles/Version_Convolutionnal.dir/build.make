@@ -34,19 +34,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /snap/clion/111/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /snap/clion/112/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /snap/clion/111/bin/cmake/linux/bin/cmake -E remove -f
+RM = /snap/clion/112/bin/cmake/linux/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript
+CMAKE_SOURCE_DIR = /home/cheerfulliu/Desktop/Version_Temporary/CNN_Manuscript
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/cmake-build-debug
+CMAKE_BINARY_DIR = /home/cheerfulliu/Desktop/Version_Temporary/CNN_Manuscript/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/Version_Convolutionnal.dir/depend.make
@@ -59,55 +59,55 @@ include CMakeFiles/Version_Convolutionnal.dir/flags.make
 
 CMakeFiles/Version_Convolutionnal.dir/main.c.o: CMakeFiles/Version_Convolutionnal.dir/flags.make
 CMakeFiles/Version_Convolutionnal.dir/main.c.o: ../main.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/Version_Convolutionnal.dir/main.c.o"
-	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Version_Convolutionnal.dir/main.c.o   -c /home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/main.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cheerfulliu/Desktop/Version_Temporary/CNN_Manuscript/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/Version_Convolutionnal.dir/main.c.o"
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Version_Convolutionnal.dir/main.c.o   -c /home/cheerfulliu/Desktop/Version_Temporary/CNN_Manuscript/main.c
 
 CMakeFiles/Version_Convolutionnal.dir/main.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Version_Convolutionnal.dir/main.c.i"
-	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/main.c > CMakeFiles/Version_Convolutionnal.dir/main.c.i
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/cheerfulliu/Desktop/Version_Temporary/CNN_Manuscript/main.c > CMakeFiles/Version_Convolutionnal.dir/main.c.i
 
 CMakeFiles/Version_Convolutionnal.dir/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Version_Convolutionnal.dir/main.c.s"
-	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/main.c -o CMakeFiles/Version_Convolutionnal.dir/main.c.s
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/cheerfulliu/Desktop/Version_Temporary/CNN_Manuscript/main.c -o CMakeFiles/Version_Convolutionnal.dir/main.c.s
 
 CMakeFiles/Version_Convolutionnal.dir/data_Images.c.o: CMakeFiles/Version_Convolutionnal.dir/flags.make
 CMakeFiles/Version_Convolutionnal.dir/data_Images.c.o: ../data_Images.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/Version_Convolutionnal.dir/data_Images.c.o"
-	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Version_Convolutionnal.dir/data_Images.c.o   -c /home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/data_Images.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cheerfulliu/Desktop/Version_Temporary/CNN_Manuscript/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/Version_Convolutionnal.dir/data_Images.c.o"
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Version_Convolutionnal.dir/data_Images.c.o   -c /home/cheerfulliu/Desktop/Version_Temporary/CNN_Manuscript/data_Images.c
 
 CMakeFiles/Version_Convolutionnal.dir/data_Images.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Version_Convolutionnal.dir/data_Images.c.i"
-	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/data_Images.c > CMakeFiles/Version_Convolutionnal.dir/data_Images.c.i
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/cheerfulliu/Desktop/Version_Temporary/CNN_Manuscript/data_Images.c > CMakeFiles/Version_Convolutionnal.dir/data_Images.c.i
 
 CMakeFiles/Version_Convolutionnal.dir/data_Images.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Version_Convolutionnal.dir/data_Images.c.s"
-	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/data_Images.c -o CMakeFiles/Version_Convolutionnal.dir/data_Images.c.s
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/cheerfulliu/Desktop/Version_Temporary/CNN_Manuscript/data_Images.c -o CMakeFiles/Version_Convolutionnal.dir/data_Images.c.s
 
 CMakeFiles/Version_Convolutionnal.dir/mat.c.o: CMakeFiles/Version_Convolutionnal.dir/flags.make
 CMakeFiles/Version_Convolutionnal.dir/mat.c.o: ../mat.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/Version_Convolutionnal.dir/mat.c.o"
-	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Version_Convolutionnal.dir/mat.c.o   -c /home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/mat.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cheerfulliu/Desktop/Version_Temporary/CNN_Manuscript/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/Version_Convolutionnal.dir/mat.c.o"
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Version_Convolutionnal.dir/mat.c.o   -c /home/cheerfulliu/Desktop/Version_Temporary/CNN_Manuscript/mat.c
 
 CMakeFiles/Version_Convolutionnal.dir/mat.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Version_Convolutionnal.dir/mat.c.i"
-	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/mat.c > CMakeFiles/Version_Convolutionnal.dir/mat.c.i
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/cheerfulliu/Desktop/Version_Temporary/CNN_Manuscript/mat.c > CMakeFiles/Version_Convolutionnal.dir/mat.c.i
 
 CMakeFiles/Version_Convolutionnal.dir/mat.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Version_Convolutionnal.dir/mat.c.s"
-	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/mat.c -o CMakeFiles/Version_Convolutionnal.dir/mat.c.s
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/cheerfulliu/Desktop/Version_Temporary/CNN_Manuscript/mat.c -o CMakeFiles/Version_Convolutionnal.dir/mat.c.s
 
 CMakeFiles/Version_Convolutionnal.dir/cnn_1.c.o: CMakeFiles/Version_Convolutionnal.dir/flags.make
 CMakeFiles/Version_Convolutionnal.dir/cnn_1.c.o: ../cnn_1.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/Version_Convolutionnal.dir/cnn_1.c.o"
-	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Version_Convolutionnal.dir/cnn_1.c.o   -c /home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/cnn_1.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cheerfulliu/Desktop/Version_Temporary/CNN_Manuscript/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/Version_Convolutionnal.dir/cnn_1.c.o"
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Version_Convolutionnal.dir/cnn_1.c.o   -c /home/cheerfulliu/Desktop/Version_Temporary/CNN_Manuscript/cnn_1.c
 
 CMakeFiles/Version_Convolutionnal.dir/cnn_1.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Version_Convolutionnal.dir/cnn_1.c.i"
-	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/cnn_1.c > CMakeFiles/Version_Convolutionnal.dir/cnn_1.c.i
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/cheerfulliu/Desktop/Version_Temporary/CNN_Manuscript/cnn_1.c > CMakeFiles/Version_Convolutionnal.dir/cnn_1.c.i
 
 CMakeFiles/Version_Convolutionnal.dir/cnn_1.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Version_Convolutionnal.dir/cnn_1.c.s"
-	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/cnn_1.c -o CMakeFiles/Version_Convolutionnal.dir/cnn_1.c.s
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/cheerfulliu/Desktop/Version_Temporary/CNN_Manuscript/cnn_1.c -o CMakeFiles/Version_Convolutionnal.dir/cnn_1.c.s
 
 # Object files for target Version_Convolutionnal
 Version_Convolutionnal_OBJECTS = \
@@ -125,7 +125,7 @@ Version_Convolutionnal: CMakeFiles/Version_Convolutionnal.dir/mat.c.o
 Version_Convolutionnal: CMakeFiles/Version_Convolutionnal.dir/cnn_1.c.o
 Version_Convolutionnal: CMakeFiles/Version_Convolutionnal.dir/build.make
 Version_Convolutionnal: CMakeFiles/Version_Convolutionnal.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking C executable Version_Convolutionnal"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/cheerfulliu/Desktop/Version_Temporary/CNN_Manuscript/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking C executable Version_Convolutionnal"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Version_Convolutionnal.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -138,6 +138,6 @@ CMakeFiles/Version_Convolutionnal.dir/clean:
 .PHONY : CMakeFiles/Version_Convolutionnal.dir/clean
 
 CMakeFiles/Version_Convolutionnal.dir/depend:
-	cd /home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript /home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript /home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/cmake-build-debug /home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/cmake-build-debug /home/cheerfulliu/Desktop/CNN_MANUSCRIPT_ZHIYUAN/CNN_Manuscript/cmake-build-debug/CMakeFiles/Version_Convolutionnal.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/cheerfulliu/Desktop/Version_Temporary/CNN_Manuscript/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/cheerfulliu/Desktop/Version_Temporary/CNN_Manuscript /home/cheerfulliu/Desktop/Version_Temporary/CNN_Manuscript /home/cheerfulliu/Desktop/Version_Temporary/CNN_Manuscript/cmake-build-debug /home/cheerfulliu/Desktop/Version_Temporary/CNN_Manuscript/cmake-build-debug /home/cheerfulliu/Desktop/Version_Temporary/CNN_Manuscript/cmake-build-debug/CMakeFiles/Version_Convolutionnal.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/Version_Convolutionnal.dir/depend
 

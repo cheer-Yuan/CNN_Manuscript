@@ -8,7 +8,7 @@
 void cnnsetup_1(CNN_1* cnn, int inputSize, int outputSize)
 {
     cnn->layerNum = 2;
-    cnn->H1 = initnnLayer(16384, inputSize);    //128*128
+    cnn->H1 = initnnLayer(4096, inputSize);    //128*128
     cnn->O1 = initnnLayer(inputSize, outputSize);
     cnn->e = (float*)calloc(cnn->H1->outputNum, sizeof(float));
 }
@@ -99,12 +99,9 @@ void cnntrain(CNN_1* cnn, ImgArr inputData, CNNOpts opts, int trainNum)
 
 }
 
-
 // forward propagation
 void cnnff(CNN_1* cnn, float* inputData)
 {
-
-
     nSize nnSize_H1 = {cnn->H1->inputNum, cnn->H1->outputNum}; //forward feeding H1
     nnff(cnn->H1->v, inputData, cnn->H1->wData, cnn->H1->biasData, nnSize_H1);
 
@@ -315,12 +312,12 @@ float cnntest(CNN_1* cnn, ImgArr inputData, int testNum)
         */
 
 
-//        cnnff(cnn, inputData->ImgPtr[n].ImgData);
-//        for(int j = 0; j < 10; ++j)
-//        {
-//            printf("%f\t", cnn->O1->y[j]);
-//        }
-//        printf("\n");
+        cnnff(cnn, inputData->ImgPtr[n].ImgData);
+        for(int j = 0; j < 10; ++j)
+        {
+            printf("%f\t", cnn->O1->y[j]);
+        }
+        printf("\n");
 
         if(vecmaxIndex(cnn->O1->y, cnn->O1->outputNum) !=
            vecmaxIndex(inputData->ImgPtr[n].LabelData, cnn->O1->outputNum))

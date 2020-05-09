@@ -23,6 +23,8 @@ void test_Network_1_on_all()
     int testNum = testImg->ImgNum;
     float incorrectRatio = 0.0;
 
+    maxpooling(testImg);
+
     incorrectRatio = cnntest(cnn_Test, testImg, testNum);
     printf("test finished!! \nincorrectrate rate = %f\n", incorrectRatio);
 
@@ -53,6 +55,7 @@ void train_cnn_1()
 
     struct timeval start, end;
     gettimeofday(&start, NULL );
+    maxpooling(trainImg);
     cnntrain(cnn, trainImg, opts, trainNum);
     gettimeofday(&end, NULL );
     long timeuse =1000000 * ( end.tv_sec - start.tv_sec ) + end.tv_usec - start.tv_usec;
