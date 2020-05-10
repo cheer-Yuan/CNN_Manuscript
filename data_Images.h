@@ -48,4 +48,11 @@ typedef struct MinstLabelArr
 
 ImgArr read_Img_1D(const char* filename, int switcher);
 
+void avereduce2(ImgArr trainImg);
+
+void avereduce4(ImgArr trainImg);
+
+void maxreduce4(ImgArr trainImg);
+
+
 #endif //VERSION_CONVOLUTIONNAL_DATA_IMAGES_H

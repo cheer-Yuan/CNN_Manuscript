@@ -214,3 +214,92 @@ ImgArr read_Img_1D(const char* filename, int switcher)
 //}
 
 
+
+// max pooling with the 1 dimension array, dim % 2 = 0, 4 pixels in 1
+void avereduce2(ImgArr trainImg)
+{
+    int newSize = trainImg->ImgPtr[0].r / 2;
+    for(int image = 0; image < trainImg->ImgNum; ++image)
+    {
+        float* newArray = (float*)malloc(newSize * newSize * sizeof(float));
+        for(int row = 0; row < newSize; ++row)
+        {
+            for(int column = 0; column < newSize; ++column)
+            {
+                float buff = (trainImg->ImgPtr[image].ImgData[2 * row * trainImg->ImgPtr[image].r + 2 * column]
+                              + trainImg->ImgPtr[image].ImgData[2 * row * trainImg->ImgPtr[image].r + 2 * column + 1]
+                              + trainImg->ImgPtr[image].ImgData[(2 * row + 1) * trainImg->ImgPtr[image].r + 2 * column]
+                              + trainImg->ImgPtr[image].ImgData[(2 * row + 1) * trainImg->ImgPtr[image].r + 2 * column + 1]) / 4;
+                newArray[row * newSize + column] = buff;
+            }
+        }
+
+        trainImg->ImgPtr[image].r = newSize;
+        realloc(trainImg->ImgPtr[image].ImgData, newSize * newSize * sizeof(float));
+        trainImg->ImgPtr[image].ImgData = newArray;
+        newArray = NULL;
+        free(newArray);
+    }
+}
+
+
+// max pooling with the 1 dimension array, dim % 2 = 0, 16 pixels in 1
+void avereduce4(ImgArr trainImg)
+{
+    int newSize = trainImg->ImgPtr[0].r / 4;
+    for(int image = 0; image < trainImg->ImgNum; ++image)
+    {
+        float* newArray = (float*)malloc(newSize * newSize * sizeof(float));
+        for(int row = 0; row < newSize; ++row)
+        {
+            for(int column = 0; column < newSize; ++column)
+            {
+                float buff = 0;
+                for(int i = 0; i < 4; ++i)
+                    buff = (trainImg->ImgPtr[image].ImgData[(4 * row + i) * trainImg->ImgPtr[image].r + 4 * column]
+                            + trainImg->ImgPtr[image].ImgData[(4 * row + i) * trainImg->ImgPtr[image].r + 4 * column + 1]
+                            + trainImg->ImgPtr[image].ImgData[(4 * row + i) * trainImg->ImgPtr[image].r + 4 * column + 2]
+                            + trainImg->ImgPtr[image].ImgData[(4 * row + i) * trainImg->ImgPtr[image].r + 4 * column + 3]);
+
+                buff /= 16;
+                newArray[row * newSize + column] = buff;
+            }
+        }
+
+        trainImg->ImgPtr[image].r = newSize;
+        realloc(trainImg->ImgPtr[image].ImgData, newSize * newSize * sizeof(float));
+        trainImg->ImgPtr[image].ImgData = newArray;
+        newArray = NULL;
+        free(newArray);
+    }
+}
+
+// max pooling with the 1 dimension array, dim % 2 = 0, 16 pixels in 1
+void maxreduce4(ImgArr trainImg) {
+    int newSize = trainImg->ImgPtr[0].r / 4;
+    for (int image = 0; image < trainImg->ImgNum; ++image) {
+        float *newArray = (float *) malloc(newSize * newSize * sizeof(float));
+        for (int row = 0; row < newSize; ++row) {
+            for (int column = 0; column < newSize; ++column) {
+                float buff = 0;
+                for (int i = 0; i < 4; ++i)
+                    buff = (trainImg->ImgPtr[image].ImgData[(4 * row + i) * trainImg->ImgPtr[image].r + 4 * column]
+                            +
+                            trainImg->ImgPtr[image].ImgData[(4 * row + i) * trainImg->ImgPtr[image].r + 4 * column + 1]
+                            +
+                            trainImg->ImgPtr[image].ImgData[(4 * row + i) * trainImg->ImgPtr[image].r + 4 * column + 2]
+                            + trainImg->ImgPtr[image].ImgData[(4 * row + i) * trainImg->ImgPtr[image].r + 4 * column +
+                                                              3]);
+
+                if (buff > 1) buff = 1.0;
+                newArray[row * newSize + column] = buff;
+            }
+        }
+
+        trainImg->ImgPtr[image].r = newSize;
+        realloc(trainImg->ImgPtr[image].ImgData, newSize * newSize * sizeof(float));
+        trainImg->ImgPtr[image].ImgData = newArray;
+        newArray = NULL;
+        free(newArray);
+    }
+}

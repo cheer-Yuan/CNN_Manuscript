@@ -3,12 +3,13 @@
 //
 
 #include "cnn_1.h"
+#include <omp.h>
 
 //setup a nn 1 hidden layer 1 out layer, inputsize OF HIDDEN LAYER and outputsize of NUMBER OF CLASS
 void cnnsetup_1(CNN_1* cnn, int inputSize, int outputSize)
 {
     cnn->layerNum = 3;
-    cnn->H1 = initnnLayer(16384, inputSize);    //128*128
+    cnn->H1 = initnnLayer(1024, inputSize);    //128*128
     cnn->H2 = initnnLayer(inputSize, inputSize);
     cnn->H3 = initnnLayer(inputSize, inputSize);
     cnn->O1 = initnnLayer(inputSize, outputSize);
@@ -101,6 +102,14 @@ void cnntrain(CNN_1* cnn, ImgArr inputData, CNNOpts opts, int trainNum)
 
 }
 
+// max pooling
+float* cnnmaxpooling(CNN_1* cnn, float* inputData, int dim)
+{
+    for (int row = 0; row < dim; ++row)
+    {
+
+    }
+}
 
 // forward propagation
 void cnnff(CNN_1* cnn, float* inputData)

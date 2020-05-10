@@ -1,46 +1,46 @@
-#include <stdio.h>
-#include <string.h>
-#include "mat.h"
-#include <dirent.h>
-#include <sys/stat.h>
-#include <stdlib.h>
+//#include <stdio.h>
+//#include <string.h>
+//#include "mat.h"
+//#include <dirent.h>
+//#include <sys/stat.h>
+//#include <stdlib.h>
+//
 
-
-char filename[256][8];
-int len = 0;
-int trave_dir(char* path, int depth)
-{
-    DIR *d; //声明一个句柄
-    struct dirent *file; //readdir函数的返回值就存放在这个结构体中
-    struct stat sb;
-
-    if(!(d = opendir(path)))
-    {
-        printf("error opendir %s!!!\n",path);
-        return -1;
-    }
-    while((file = readdir(d)) != NULL)
-    {
-        //把当前目录.，上一级目录..及隐藏文件都去掉，避免死循环遍历目录
-        if(strncmp(file->d_name, ".", 1) == 0)
-            continue;
-        strcpy(filename[len++], file->d_name);
-    }
-    closedir(d);
-    return 0;
-}
-int main()
-{
-    int depth = 1;
-    int i;
-    trave_dir("../../Dataset_Numbers/", depth);
-    for(i = 0; i < len; i++)
-    {
-        printf("%d\t", atoi(filename[i]) % 10);
-    }
-    printf("\n");
-    return 0;
-}
+//char filename[256][8];
+//int len = 0;
+//int trave_dir(char* path, int depth)
+//{
+//    DIR *d; //声明一个句柄
+//    struct dirent *file; //readdir函数的返回值就存放在这个结构体中
+//    struct stat sb;
+//
+//    if(!(d = opendir(path)))
+//    {
+//        printf("error opendir %s!!!\n",path);
+//        return -1;
+//    }
+//    while((file = readdir(d)) != NULL)
+//    {
+//        //把当前目录.，上一级目录..及隐藏文件都去掉，避免死循环遍历目录
+//        if(strncmp(file->d_name, ".", 1) == 0)
+//            continue;
+//        strcpy(filename[len++], file->d_name);
+//    }
+//    closedir(d);
+//    return 0;
+//}
+//int main()
+//{
+//    int depth = 1;
+//    int i;
+//    trave_dir("../../Dataset_Numbers/", depth);
+//    for(i = 0; i < len; i++)
+//    {
+//        printf("%d\t", atoi(filename[i]) % 10);
+//    }
+//    printf("\n");
+//    return 0;
+//}
 
 
 
@@ -95,3 +95,22 @@ int main(void)
     return 0;
 }
 */
+
+#include <stdlib.h>
+#include <stdio.h>
+
+int main()
+{
+    int* a = (int*)malloc(3 * sizeof(int));
+    int* b = (int*)malloc(2 * sizeof(int));
+    for(int i = 0; i < 3; ++i)
+    {
+        a[i] = i;
+        if(i < 2 ) b[i] = i + 1;
+    }
+
+    realloc(a, 2 * sizeof(int));
+    a = b;
+    printf("%d\n", a[2]);
+    return 0;
+}

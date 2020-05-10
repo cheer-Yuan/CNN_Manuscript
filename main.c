@@ -5,7 +5,7 @@
 
 #include "cnn_1.h"
 
-#define Nodes_1 1000
+#define Nodes_1 30
 #define outSize 10
 
 void test_Network_1_on_all()
@@ -20,7 +20,7 @@ void test_Network_1_on_all()
 
     int testNum = testImg->ImgNum;
     float incorrectRatio = 0.0;
-
+    avereduce4(testImg);
     incorrectRatio = cnntest(cnn_Test, testImg, testNum);
     printf("test finished!! \nincorrectrate rate = %f\n", incorrectRatio);
 
@@ -42,12 +42,13 @@ void train_cnn_1()
     importcnn(cnn, "../train_of_cnn_1_on_numbers.cnn");
 
     CNNOpts opts;
-    opts.numepochs = 1;
-    opts.alpha = 0.0001;
+    opts.numepochs = 100;
+    opts.alpha = 0.001;
     int trainNum = trainImg->ImgNum;
 
     struct timeval start, end;
     gettimeofday(&start, NULL );
+    avereduce4(trainImg);
     cnntrain(cnn, trainImg, opts, trainNum);
     gettimeofday(&end, NULL );
     long timeuse =1000000 * ( end.tv_sec - start.tv_sec ) + end.tv_usec - start.tv_usec;

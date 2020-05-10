@@ -13,7 +13,7 @@
 #include <time.h>
 
 #define full 0
-#define same 1
+#define same 1 
 #define valid 2
 
 typedef struct Mat2DSize{

@@ -70,5 +70,7 @@ void importcnn(CNN_1* cnn, const char* filename);
 
 float cnntest(CNN_1* cnn, ImgArr inputData, int testNum);
 
+float* cnnmaxpooling(CNN_1* cnn, float* inputData, int dim);
+
 
 #endif //VERSION_CONVOLUTIONNAL_CNN_1_H
