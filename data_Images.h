@@ -48,6 +48,14 @@ ImgArr read_Img(const char* filename); // readimg
 
 ImgArr read_Img_1D(const char* filename, int switcher); // readimg
 
-void maxpooling(ImgArr trainImg);
+void avereduce2(ImgArr trainImg);
+
+void avereduce4(ImgArr trainImg);
+
+void maxreduce4(ImgArr trainImg);
+
+void conv4kern(ImgArr trainImg);
+
+
 
 #endif //VERSION_CONVOLUTIONNAL_DATA_IMAGES_H

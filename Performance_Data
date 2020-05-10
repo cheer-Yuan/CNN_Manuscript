@@ -82,6 +82,81 @@ incorrectrate rate = 0.694000
 
 
 
+avereduce4
+
+time for reading : 0.578846
+Epoch num : 1
+Epoch num : 2
+Epoch num : 3
+Epoch num : 4
+Epoch num : 5
+train finished!!
+train epoch : 5
+nodes in hidden layer : 30
+time for training : 2.421905
+
+0.176126	0.145937	0.163391	0.161738	0.143340	0.168643	0.155508	0.204669	0.187916	0.151914
+0.176748	0.143455	0.161459	0.162126	0.141644	0.168088	0.151124	0.203935	0.186660	0.150991
+0.172971	0.141130	0.158715	0.162750	0.142745	0.169021	0.148664	0.203169	0.186475	0.150105
+0.178627	0.144724	0.165747	0.161084	0.141601	0.169228	0.155304	0.202800	0.185810	0.153829
+0.174917	0.145055	0.162153	0.162864	0.140938	0.165614	0.154401	0.206466	0.187717	0.150924
+test finished!!
+incorrectrate rate = 0.900000
+
+
+
+
+
+maxreduce4 :
+
+time for reading : 0.567778
+
+lr 0.001
+train epoch : 20
+nodes in hidden layer : 30
+time for training : 9.587004
+incorrectrate rate = 0.368000
+
+lr 0.001
+train epoch : 50
+nodes in hidden layer : 30
+time for training : 23.876114
+incorrectrate rate = 0.275000
+
+
+lr 0.001
+train epoch : 100
+nodes in hidden layer : 30
+time for training : 47.890113
+incorrectrate rate = 0.244000
+
+
+
+epoch 100 :
+	lr 0.01 : incorrectrate rate = 0.352000
+	lr 0.001 : incorrectrate rate = 0.251000
+	avereduce4 : incorrectrate rate = 0.233000
+	avereduce2 : time for training : 186.518330    incorrectrate rate = 0.229000
+
+
+
+nodes 100, lr 0.001, epoch 100:
+train epoch : 100
+nodes in hidden layer : 100
+time for training : 160.682866
+incorrectrate rate = 0.434000
+
+
+avereduce4 :
+	lr 0.01
+	train epoch : 100
+    nodes in hidden layer : 30
+    time for training : 48.900988
+	incorrectrate rate = 0.198000
+
+	lr 0.1 : incorrectrate rate = 0.678000
+
+
 
 old version :
 time for reading : 11.663354 for 20 files ==> 5831.675 seconds for 10000 files

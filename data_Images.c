@@ -218,7 +218,7 @@ ImgArr read_Img_1D(const char* filename, int switcher)
 
 
 // max pooling with the 1 dimension array, dim % 2 = 0, 4 pixels in 1
-void maxpooling(ImgArr trainImg)
+void avereduce2(ImgArr trainImg)
 {
     int newSize = trainImg->ImgPtr[0].r / 2;
     for(int image = 0; image < trainImg->ImgNum; ++image)
@@ -242,5 +242,120 @@ void maxpooling(ImgArr trainImg)
         newArray = NULL;
         free(newArray);
     }
-
 }
+
+
+// max pooling with the 1 dimension array, dim % 2 = 0, 16 pixels in 1
+void avereduce4(ImgArr trainImg)
+{
+    int newSize = trainImg->ImgPtr[0].r / 4;
+    for(int image = 0; image < trainImg->ImgNum; ++image)
+    {
+        float* newArray = (float*)malloc(newSize * newSize * sizeof(float));
+        for(int row = 0; row < newSize; ++row)
+        {
+            for(int column = 0; column < newSize; ++column)
+            {
+                float buff = 0;
+                for(int i = 0; i < 4; ++i)
+                    buff = (trainImg->ImgPtr[image].ImgData[(4 * row + i) * trainImg->ImgPtr[image].r + 4 * column]
+                            + trainImg->ImgPtr[image].ImgData[(4 * row + i) * trainImg->ImgPtr[image].r + 4 * column + 1]
+                            + trainImg->ImgPtr[image].ImgData[(4 * row + i) * trainImg->ImgPtr[image].r + 4 * column + 2]
+                            + trainImg->ImgPtr[image].ImgData[(4 * row + i) * trainImg->ImgPtr[image].r + 4 * column + 3]);
+
+                buff /= 16;
+                newArray[row * newSize + column] = buff;
+            }
+        }
+
+        trainImg->ImgPtr[image].r = newSize;
+        realloc(trainImg->ImgPtr[image].ImgData, newSize * newSize * sizeof(float));
+        trainImg->ImgPtr[image].ImgData = newArray;
+        newArray = NULL;
+        free(newArray);
+    }
+}
+
+// max pooling with the 1 dimension array, dim % 2 = 0, 16 pixels in 1
+void maxreduce4(ImgArr trainImg)
+{
+    int newSize = trainImg->ImgPtr[0].r / 4;
+    for(int image = 0; image < trainImg->ImgNum; ++image)
+    {
+        float* newArray = (float*)malloc(newSize * newSize * sizeof(float));
+        for(int row = 0; row < newSize; ++row)
+        {
+            for(int column = 0; column < newSize; ++column)
+            {
+                float buff = 0;
+                for(int i = 0; i < 4; ++i)
+                    buff = (trainImg->ImgPtr[image].ImgData[(4 * row + i) * trainImg->ImgPtr[image].r + 4 * column]
+                            + trainImg->ImgPtr[image].ImgData[(4 * row + i) * trainImg->ImgPtr[image].r + 4 * column + 1]
+                            + trainImg->ImgPtr[image].ImgData[(4 * row + i) * trainImg->ImgPtr[image].r + 4 * column + 2]
+                            + trainImg->ImgPtr[image].ImgData[(4 * row + i) * trainImg->ImgPtr[image].r + 4 * column + 3]);
+
+                if(buff > 1) buff = 1.0;
+                newArray[row * newSize + column] = buff;
+            }
+        }
+
+        trainImg->ImgPtr[image].r = newSize;
+        realloc(trainImg->ImgPtr[image].ImgData, newSize * newSize * sizeof(float));
+        trainImg->ImgPtr[image].ImgData = newArray;
+        newArray = NULL;
+        free(newArray);
+    }
+}
+
+//void conv4kern(ImgArr trainImg)
+//{
+//    float *kern1 = (float *) malloc(9 * sizeof(float));     //-1, -1, -1, 1, 1, 1, 0, 0, 0
+//    kern1[0] = kern1[1] = kern1[2] = -1;
+//    kern1[3] = kern1[4] = kern1[5] = 1;
+//    kern1[6] = kern1[7] = kern1[8] = 0;
+//
+//    float *kern2 = (float *) malloc(9 * sizeof(float));     //kern2T
+//    kern2[0] = kern2[3] = kern2[6] = -1;
+//    kern2[1] = kern2[4] = kern2[7] = 1;
+//    kern2[2] = kern2[5] = kern2[8] = 0;
+//
+//    float *kern3 = (float *) malloc(9 * sizeof(float));     //0, 0, 0, 1, 1, 1, -1, -1, -1
+//    kern3[0] = kern3[1] = kern3[2] = 0;
+//    kern3[3] = kern3[4] = kern3[5] = 1;
+//    kern3[6] = kern3[7] = kern3[8] = -1;
+//
+//    float *kern4 = (float *) malloc(9 * sizeof(float));     //kern3T
+//    kern4[0] = kern4[3] = kern4[6] = 0;
+//    kern4[1] = kern4[4] = kern4[7] = 1;
+//    kern4[2] = kern4[5] = kern4[8] = -1;
+//
+//    for (int image = 0; image < trainImg->ImgNum; ++image)
+//    {
+//        float *newArray = (float *) malloc(4 * trainImg->ImgPtr[image].r * trainImg->ImgPtr[image].r * sizeof(float));
+//        for(int kern = 0;  kern < 4; ++kern)
+//        {
+//            for (int row = 0; row < trainImg->ImgPtr[image].r; ++row) {
+//                for (int column = 0; column < trainImg->ImgPtr[image].r; ++column) {
+//                    float buff = 0;
+//                    for (int i = 0; i < 4; ++i)
+//                        buff = (trainImg->ImgPtr[image].ImgData[(4 * row + i) * trainImg->ImgPtr[image].r + 4 * column]
+//                                +
+//                                trainImg->ImgPtr[image].ImgData[(4 * row + i) * trainImg->ImgPtr[image].r + 4 * column + 1]
+//                                +
+//                                trainImg->ImgPtr[image].ImgData[(4 * row + i) * trainImg->ImgPtr[image].r + 4 * column + 2]
+//                                + trainImg->ImgPtr[image].ImgData[(4 * row + i) * trainImg->ImgPtr[image].r + 4 * column +
+//                                                                  3]);
+//
+//                    if (buff > 1) buff = 1.0;
+//                    newArray[row * newSize + column] = buff;
+//                }
+//            }
+//        }
+//
+//        trainImg->ImgPtr[image].r = newSize;
+//        realloc(trainImg->ImgPtr[image].ImgData, newSize * newSize * sizeof(float));
+//        trainImg->ImgPtr[image].ImgData = newArray;
+//        newArray = NULL;
+//        free(newArray);
+//    }
+//}
