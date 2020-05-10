@@ -21,22 +21,24 @@ typedef struct Mat2DSize{
     int r;
 }nSize;
 
-float** rotate180(float** mat, nSize matSize);
+float bigger4(float y1, float y2, float y3, float y4);
 
-void addmat(float** res, float** mat1, nSize matSize1, float** mat2, nSize matSize2);
-
-float** correlation(float** map,nSize mapSize,float** inputData,nSize inSize,int type);
-
-float** cov(float** map,nSize mapSize,float** inputData,nSize inSize,int type);
-
-float** UpSample(float** mat,nSize matSize,int upc,int upr);
-
-float** matEdgeExpand(float** mat,nSize matSize,int addc,int addr);
-
-float** matEdgeShrink(float** mat,nSize matSize,int shrinkc,int shrinkr);
-
-void multifactor(float** res, float** mat, nSize matSize, float factor);
-float summat(float** mat,nSize matSize);
+//float** rotate180(float** mat, nSize matSize);
+//
+//void addmat(float** res, float** mat1, nSize matSize1, float** mat2, nSize matSize2);
+//
+//float** correlation(float** map,nSize mapSize,float** inputData,nSize inSize,int type);
+//
+//float** cov(float** map,nSize mapSize,float** inputData,nSize inSize,int type);
+//
+//float** UpSample(float** mat,nSize matSize,int upc,int upr);
+//
+//float** matEdgeExpand(float** mat,nSize matSize,int addc,int addr);
+//
+//float** matEdgeShrink(float** mat,nSize matSize,int shrinkc,int shrinkr);
+//
+//void multifactor(float** res, float** mat, nSize matSize, float factor);
+//float summat(float** mat,nSize matSize);
 
 char * combine_strings(const char *a, const char *b);
 

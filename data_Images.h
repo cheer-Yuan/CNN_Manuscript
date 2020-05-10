@@ -56,6 +56,8 @@ void maxreduce4(ImgArr trainImg);
 
 void conv4kern(ImgArr trainImg);
 
+void maxpooling2s2(ImgArr trainImg);
+
 
 
 #endif //VERSION_CONVOLUTIONNAL_DATA_IMAGES_H

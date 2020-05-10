@@ -307,55 +307,124 @@ void maxreduce4(ImgArr trainImg)
     }
 }
 
-//void conv4kern(ImgArr trainImg)
-//{
-//    float *kern1 = (float *) malloc(9 * sizeof(float));     //-1, -1, -1, 1, 1, 1, 0, 0, 0
-//    kern1[0] = kern1[1] = kern1[2] = -1;
-//    kern1[3] = kern1[4] = kern1[5] = 1;
-//    kern1[6] = kern1[7] = kern1[8] = 0;
-//
-//    float *kern2 = (float *) malloc(9 * sizeof(float));     //kern2T
-//    kern2[0] = kern2[3] = kern2[6] = -1;
-//    kern2[1] = kern2[4] = kern2[7] = 1;
-//    kern2[2] = kern2[5] = kern2[8] = 0;
-//
-//    float *kern3 = (float *) malloc(9 * sizeof(float));     //0, 0, 0, 1, 1, 1, -1, -1, -1
-//    kern3[0] = kern3[1] = kern3[2] = 0;
-//    kern3[3] = kern3[4] = kern3[5] = 1;
-//    kern3[6] = kern3[7] = kern3[8] = -1;
-//
-//    float *kern4 = (float *) malloc(9 * sizeof(float));     //kern3T
-//    kern4[0] = kern4[3] = kern4[6] = 0;
-//    kern4[1] = kern4[4] = kern4[7] = 1;
-//    kern4[2] = kern4[5] = kern4[8] = -1;
-//
-//    for (int image = 0; image < trainImg->ImgNum; ++image)
-//    {
-//        float *newArray = (float *) malloc(4 * trainImg->ImgPtr[image].r * trainImg->ImgPtr[image].r * sizeof(float));
-//        for(int kern = 0;  kern < 4; ++kern)
-//        {
-//            for (int row = 0; row < trainImg->ImgPtr[image].r; ++row) {
-//                for (int column = 0; column < trainImg->ImgPtr[image].r; ++column) {
-//                    float buff = 0;
-//                    for (int i = 0; i < 4; ++i)
-//                        buff = (trainImg->ImgPtr[image].ImgData[(4 * row + i) * trainImg->ImgPtr[image].r + 4 * column]
-//                                +
-//                                trainImg->ImgPtr[image].ImgData[(4 * row + i) * trainImg->ImgPtr[image].r + 4 * column + 1]
-//                                +
-//                                trainImg->ImgPtr[image].ImgData[(4 * row + i) * trainImg->ImgPtr[image].r + 4 * column + 2]
-//                                + trainImg->ImgPtr[image].ImgData[(4 * row + i) * trainImg->ImgPtr[image].r + 4 * column +
-//                                                                  3]);
-//
-//                    if (buff > 1) buff = 1.0;
-//                    newArray[row * newSize + column] = buff;
-//                }
-//            }
-//        }
-//
-//        trainImg->ImgPtr[image].r = newSize;
-//        realloc(trainImg->ImgPtr[image].ImgData, newSize * newSize * sizeof(float));
-//        trainImg->ImgPtr[image].ImgData = newArray;
-//        newArray = NULL;
-//        free(newArray);
-//    }
-//}
+//concolution with 4 kernels
+void conv4kern(ImgArr trainImg)
+{
+    float *kern1 = (float *) malloc(9 * sizeof(float));     //-1, -1, -1, 1, 1, 1, 0, 0, 0
+    kern1[0] = kern1[1] = kern1[2] = -1;                         // detect the lower edge
+    kern1[3] = kern1[4] = kern1[5] = 1;
+    kern1[6] = kern1[7] = kern1[8] = 0;
+
+    float *kern2 = (float *) malloc(9 * sizeof(float));     //kern1T
+    kern2[0] = kern2[3] = kern2[6] = -1;                         //detect the right edge
+    kern2[1] = kern2[4] = kern2[7] = 1;
+    kern2[2] = kern2[5] = kern2[8] = 0;
+
+    float *kern3 = (float *) malloc(9 * sizeof(float));     //0, 0, 0, 1, 1, 1, -1, -1, -1
+    kern3[0] = kern3[1] = kern3[2] = 0;                          //detect the upper edge
+    kern3[3] = kern3[4] = kern3[5] = 1;
+    kern3[6] = kern3[7] = kern3[8] = -1;
+
+    float *kern4 = (float *) malloc(9 * sizeof(float));     //kern3T
+    kern4[0] = kern4[3] = kern4[6] = 0;                          // detect the left edge
+    kern4[1] = kern4[4] = kern4[7] = 1;
+    kern4[2] = kern4[5] = kern4[8] = -1;
+
+    //for every image
+    for (int image = 0; image < trainImg->ImgNum; ++image)
+    {
+        int newSize = trainImg->ImgPtr[image].r - 2;
+        //new array for 4 pattern matrices
+        float *newArray = (float *) malloc(4 * newSize * newSize * sizeof(float));
+        //no need to refill the lost pixels because the edge is wide
+
+
+        for (int row = 0; row < newSize; ++row)
+        {
+            for (int column = 0; column < newSize; ++column)
+            {
+                //pattern matrice 1
+                newArray[row * newSize + column] =
+                    trainImg->ImgPtr[image].ImgData[row * trainImg->ImgPtr[image].r + column] * kern1[0]
+                    + trainImg->ImgPtr[image].ImgData[row * trainImg->ImgPtr[image].r + column + 1] * kern1[1]
+                    + trainImg->ImgPtr[image].ImgData[row * trainImg->ImgPtr[image].r + column + 2] * kern1[2]
+                    + trainImg->ImgPtr[image].ImgData[(row + 1) * trainImg->ImgPtr[image].r + column] * kern1[3]
+                    + trainImg->ImgPtr[image].ImgData[(row + 1) * trainImg->ImgPtr[image].r + column + 1] * kern1[4]
+                    + trainImg->ImgPtr[image].ImgData[(row + 1) * trainImg->ImgPtr[image].r + column + 2] * kern1[5]
+                    + trainImg->ImgPtr[image].ImgData[(row + 2) * trainImg->ImgPtr[image].r + column] * kern1[6]
+                    + trainImg->ImgPtr[image].ImgData[(row + 2) * trainImg->ImgPtr[image].r + column] * kern1[7]
+                    + trainImg->ImgPtr[image].ImgData[(row + 2) * trainImg->ImgPtr[image].r + column] * kern1[8];
+
+                // 2
+                newArray[newSize * newSize + row * newSize + column] =
+                    trainImg->ImgPtr[image].ImgData[row * trainImg->ImgPtr[image].r + column] * kern2[0]
+                    + trainImg->ImgPtr[image].ImgData[row * trainImg->ImgPtr[image].r + column + 1] * kern2[1]
+                    + trainImg->ImgPtr[image].ImgData[row * trainImg->ImgPtr[image].r + column + 2] * kern2[2]
+                    + trainImg->ImgPtr[image].ImgData[(row + 1) * trainImg->ImgPtr[image].r + column] * kern2[3]
+                    + trainImg->ImgPtr[image].ImgData[(row + 1) * trainImg->ImgPtr[image].r + column + 1] * kern2[4]
+                    + trainImg->ImgPtr[image].ImgData[(row + 1) * trainImg->ImgPtr[image].r + column + 2] * kern2[5]
+                    + trainImg->ImgPtr[image].ImgData[(row + 2) * trainImg->ImgPtr[image].r + column] * kern2[6]
+                    + trainImg->ImgPtr[image].ImgData[(row + 2) * trainImg->ImgPtr[image].r + column] * kern2[7]
+                    + trainImg->ImgPtr[image].ImgData[(row + 2) * trainImg->ImgPtr[image].r + column] * kern2[8];
+
+                //3
+                newArray[2 * newSize * newSize + row * newSize + column] =
+                    trainImg->ImgPtr[image].ImgData[row * trainImg->ImgPtr[image].r + column] * kern3[0]
+                    + trainImg->ImgPtr[image].ImgData[row * trainImg->ImgPtr[image].r + column + 1] * kern3[1]
+                    + trainImg->ImgPtr[image].ImgData[row * trainImg->ImgPtr[image].r + column + 2] * kern3[2]
+                    + trainImg->ImgPtr[image].ImgData[(row + 1) * trainImg->ImgPtr[image].r + column] * kern3[3]
+                    + trainImg->ImgPtr[image].ImgData[(row + 1) * trainImg->ImgPtr[image].r + column + 1] * kern3[4]
+                    + trainImg->ImgPtr[image].ImgData[(row + 1) * trainImg->ImgPtr[image].r + column + 2] * kern3[5]
+                    + trainImg->ImgPtr[image].ImgData[(row + 2) * trainImg->ImgPtr[image].r + column] * kern3[6]
+                    + trainImg->ImgPtr[image].ImgData[(row + 2) * trainImg->ImgPtr[image].r + column] * kern3[7]
+                    + trainImg->ImgPtr[image].ImgData[(row + 2) * trainImg->ImgPtr[image].r + column] * kern3[8];
+
+                //4
+                newArray[3 * newSize * newSize + row * newSize + column] =
+                    trainImg->ImgPtr[image].ImgData[row * trainImg->ImgPtr[image].r + column] * kern4[0]
+                    + trainImg->ImgPtr[image].ImgData[row * trainImg->ImgPtr[image].r + column + 1] * kern4[1]
+                    + trainImg->ImgPtr[image].ImgData[row * trainImg->ImgPtr[image].r + column + 2] * kern4[2]
+                    + trainImg->ImgPtr[image].ImgData[(row + 1) * trainImg->ImgPtr[image].r + column] * kern4[3]
+                    + trainImg->ImgPtr[image].ImgData[(row + 1) * trainImg->ImgPtr[image].r + column + 1] * kern4[4]
+                    + trainImg->ImgPtr[image].ImgData[(row + 1) * trainImg->ImgPtr[image].r + column + 2] * kern4[5]
+                    + trainImg->ImgPtr[image].ImgData[(row + 2) * trainImg->ImgPtr[image].r + column] * kern4[6]
+                    + trainImg->ImgPtr[image].ImgData[(row + 2) * trainImg->ImgPtr[image].r + column] * kern4[7]
+                    + trainImg->ImgPtr[image].ImgData[(row + 2) * trainImg->ImgPtr[image].r + column] * kern4[8];
+            }
+        }
+        trainImg->ImgPtr[image].r = newSize;
+        realloc(trainImg->ImgPtr[image].ImgData, 4 * newSize * newSize * sizeof(float));
+        trainImg->ImgPtr[image].ImgData = newArray;
+        newArray = NULL;
+        free(newArray);
+    }
+}
+
+//max pooling with 2x2 matrice stride 2
+void maxpooling2s2(ImgArr trainImg)
+{
+    /*   r     r     r     r
+     * [...] [...] [...] [...]
+     */
+    int newSize = trainImg->ImgPtr[0].r / 2;
+    for(int image = 0; image < trainImg->ImgNum; ++image)
+    {
+        float* newArray = (float*)malloc(4 * newSize * newSize * sizeof(float));
+        for(int row = 0; row < newSize * 4; ++row)
+        {
+            for(int column = 0; column < newSize; ++column)
+            {
+                newArray[row * newSize + column] = bigger4(trainImg->ImgPtr[image].ImgData[2 * row * trainImg->ImgPtr[image].r + 2 * column],
+                        trainImg->ImgPtr[image].ImgData[2 * row * trainImg->ImgPtr[image].r + 2 * column + 1],
+                        trainImg->ImgPtr[image].ImgData[(2 * row + 1) * trainImg->ImgPtr[image].r + 2 * column],
+                        trainImg->ImgPtr[image].ImgData[(2 * row + 1) * trainImg->ImgPtr[image].r + 2 * column + 1]);
+            }
+        }
+
+        trainImg->ImgPtr[image].r = newSize;
+        realloc(trainImg->ImgPtr[image].ImgData, 4 * newSize * newSize * sizeof(float));
+        trainImg->ImgPtr[image].ImgData = newArray;
+        newArray = NULL;
+        free(newArray);
+    }
+}

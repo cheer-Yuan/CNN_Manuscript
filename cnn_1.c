@@ -8,7 +8,7 @@
 void cnnsetup_1(CNN_1* cnn, int inputSize, int outputSize)
 {
     cnn->layerNum = 2;
-    cnn->H1 = initnnLayer(1024, inputSize);    //128*128
+    cnn->H1 = initnnLayer(900, inputSize);    // 15 * 15 * 4
     cnn->O1 = initnnLayer(inputSize, outputSize);
     cnn->e = (float*)calloc(cnn->H1->outputNum, sizeof(float));
 }

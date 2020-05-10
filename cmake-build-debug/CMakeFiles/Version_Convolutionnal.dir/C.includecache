@@ -6,23 +6,27 @@
 
 #IncludeRegexTransform: 
 
-/home/cheerfulliu/Desktop/Version_Temporary/CNN_Manuscript/data_Images.c
-data_Images.h
-/home/cheerfulliu/Desktop/Version_Temporary/CNN_Manuscript/data_Images.h
-string.h
--
-stdio.h
--
-assert.h
--
-stdlib.h
+/home/cheerfulliu/Desktop/Version_Temporary/CNN_Manuscript/cnn_1.h
+stdbool.h
 -
 mat.h
 /home/cheerfulliu/Desktop/Version_Temporary/CNN_Manuscript/mat.h
-dirent.h
--
+data_Images.h
+/home/cheerfulliu/Desktop/Version_Temporary/CNN_Manuscript/data_Images.h
 
 /home/cheerfulliu/Desktop/Version_Temporary/CNN_Manuscript/data_Images.h
+
+/home/cheerfulliu/Desktop/Version_Temporary/CNN_Manuscript/main.c
+data_Images.h
+/home/cheerfulliu/Desktop/Version_Temporary/CNN_Manuscript/data_Images.h
+time.h
+-
+sys/time.h
+-
+mat.h
+/home/cheerfulliu/Desktop/Version_Temporary/CNN_Manuscript/mat.h
+cnn_1.h
+/home/cheerfulliu/Desktop/Version_Temporary/CNN_Manuscript/cnn_1.h
 
 /home/cheerfulliu/Desktop/Version_Temporary/CNN_Manuscript/mat.h
 stdlib.h
