@@ -177,6 +177,9 @@ incorrectrate rate = 0.122000
 train epoch : 200
 incorrectrate rate = 0.342000
 
+lr 0.01 :
+incorrectrate rate = 0.162000
+
 lr 0.1 :
 incorrectrate rate = 0.240000
 
