@@ -52,7 +52,7 @@ void train_cnn_1()
 
     CNNOpts opts;
     opts.numepochs = 100;
-    opts.alpha = 0.001;
+    opts.alpha = 0.01;
     int trainNum = trainImg->ImgNum;
 
     struct timeval start, end;

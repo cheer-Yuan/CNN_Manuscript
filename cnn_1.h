@@ -50,13 +50,17 @@ void cnnff(CNN_1* cnn, float* inputData);
 
 void nnff(float* output, float* input, float** wdata, float* bas, nSize nnSize);
 
-float activation_Sigma(float input,float bas);
+float activation_Sigma(float input, float bas);
+
+float activation_Relu(float input, float bas);
 
 float vecMulti(float* vec1, float* vec2, int vecL);
 
 void cnnbp(CNN_1* cnn,float* outputData); // backward propagation
 
 float sigma_derivation(float y);
+
+float relu_derivation(float y);
 
 void cnnapplygrads(CNN_1* cnn, CNNOpts opts, float* inputData); // renew weights in IN -> H1 and H1 -> O1
 

@@ -104,20 +104,16 @@ void cnnff(CNN_1* cnn, float* inputData)
 {
     nSize nnSize_H1 = {cnn->H1->inputNum, cnn->H1->outputNum}; //forward feeding H1
     nnff(cnn->H1->v, inputData, cnn->H1->wData, cnn->H1->biasData, nnSize_H1);
-
-
+    
     for(int i = 0; i < cnn->H1->outputNum; ++i) //activation H1
-        cnn->H1->y[i] = activation_Sigma(cnn->H1->v[i], cnn->H1->biasData[i]);
+        cnn->H1->y[i] = activation_Relu(cnn->H1->v[i], cnn->H1->biasData[i]);
 
     nSize nnSize_O1 = {cnn->O1->inputNum, cnn->O1->outputNum}; //forward feeding O1
     nnff(cnn->O1->v, cnn->H1->y, cnn->O1->wData, cnn->O1->biasData, nnSize_O1);
     //v : output of dotpro; y : input of dotpro  wData: [i][j] i = size of O1 j: size of H1
 
     for(int i = 0; i < cnn->O1->outputNum; ++i) //activation O1
-        cnn->O1->y[i] = activation_Sigma(cnn->O1->v[i], cnn->O1->biasData[i]);
-
-
-
+        cnn->O1->y[i] = activation_Relu(cnn->O1->v[i], cnn->O1->biasData[i]);
 }
 
 //input * wight + bias
@@ -133,6 +129,13 @@ float activation_Sigma(float input,float biaas)
 {
     float temp = input + biaas;
     return (float)1.0 / ((float)(1.0 + exp( - temp)));
+}
+
+float activation_Relu(float input, float bas)
+{
+    float temp = input + bas;
+    if(temp > 0) return temp;
+    else return 0;
 }
 
 //dot product of 2 vectors
@@ -151,11 +154,11 @@ void cnnbp(CNN_1* cnn,float* outputData) // backward propagation
 {
     for(int i = 0; i < cnn->O1->outputNum; ++i) cnn->e[i] = outputData[i] - cnn->O1->y[i];  //error vector
 
-    // O1 layer, calculate sigma deriv
+    // O1 layer, calculate reluderiv
     for(int i = 0; i < cnn->O1->outputNum; ++i) cnn->O1->d[i] = cnn->e[i] * sigma_derivation(cnn->O1->y[i]);
 
 
-    // H1 layer, calculate sigma deriv
+    // H1 layer, calculate reluderiv
     for(int j = 0; j < cnn->H1->outputNum; ++j) //j < 30
     {   //i < 10
         for (int i = 0; i < cnn->O1->outputNum; ++i) cnn->H1->d[j] += cnn->O1->d[i] * cnn->O1->wData[i][j];
@@ -168,6 +171,13 @@ float sigma_derivation(float y)
 {
     return activation_Sigma(y, 0) * (1 - activation_Sigma(y, 0));
 }
+
+float relu_derivation(float y)
+{
+    if(y > 0) return 1;
+    else return 0;
+}
+
 
 void cnnapplygrads(CNN_1* cnn, CNNOpts opts, float* inputData) // renew weights in IN -> H1 and H1 -> O1
 {

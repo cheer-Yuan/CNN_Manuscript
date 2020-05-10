@@ -184,6 +184,18 @@ lr 0.1 :
 incorrectrate rate = 0.240000
 
 
+
+
+relu :
+
+train epoch : 100
+nodes in hidden layer : 30
+time for training : 41.236087
+incorrectrate rate = 0.104000
+
+
+
+
 old version :
 time for reading : 11.663354 for 20 files ==> 5831.675 seconds for 10000 files
 time for training : 25.784059 for 20 files ==> 12892.03 seconds for 10000 files
