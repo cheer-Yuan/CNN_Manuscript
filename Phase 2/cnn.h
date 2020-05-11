@@ -87,7 +87,7 @@ typedef struct cnn_network
 
 typedef struct train_opts
 {
-    int numepochs; // number of ieration
+    int numepochs; // number of iteration
     float alpha; // learning rate
 } CNNOpts;
 
