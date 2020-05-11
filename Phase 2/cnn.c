@@ -153,7 +153,7 @@ OutLayer* initOutLayer(int inputNum,int outputNum)
     return outL;
 }
 
-int vecmaxIndex(float* vec, int veclength )//retern the max index
+int vecmaxIndex(float* vec, int veclength )//return the max index
 {
     int i;
     float maxnum=-1.0;
