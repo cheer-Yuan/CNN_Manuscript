@@ -8,6 +8,7 @@
 #include <stdbool.h>
 #include "mat.h"
 #include "data_Images.h"
+#include <omp.h>
 
 
 

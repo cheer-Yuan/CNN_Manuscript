@@ -193,6 +193,23 @@ nodes in hidden layer : 30
 time for training : 41.236087
 incorrectrate rate = 0.104000
 
+openmp :
+train epoch : 100
+nodes in hidden layer : 30
+time for convolution and pooling : 0.179014
+time for training : 28.852752
+incorrectrate rate = 0.101000
+
+
+
+
+
+
+
+
+
+
+
 
 
 

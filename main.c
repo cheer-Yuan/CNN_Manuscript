@@ -52,22 +52,26 @@ void train_cnn_1()
 
     CNNOpts opts;
     opts.numepochs = 100;
-    opts.alpha = 0.01;
+    opts.alpha = 0.001;
     int trainNum = trainImg->ImgNum;
 
-    struct timeval start, end;
+    struct timeval start, end1, end2;
     gettimeofday(&start, NULL );
 
     avereduce4(trainImg);   //32 * 32
     conv4kern(trainImg);    //30 * 30 * 4
     maxpooling2s2(trainImg);    //15 * 15 * 4 = 900
+    gettimeofday(&end1, NULL );
+
     cnntrain(cnn, trainImg, opts, trainNum);
 
-    gettimeofday(&end, NULL );
-    long timeuse =1000000 * ( end.tv_sec - start.tv_sec ) + end.tv_usec - start.tv_usec;
+    gettimeofday(&end2, NULL );
+    long timeuse1 = 1000000 * ( end1.tv_sec - start.tv_sec ) + end1.tv_usec - start.tv_usec;
+    long timeuse2 = 1000000 * ( end2.tv_sec - start.tv_sec ) + end2.tv_usec - end1.tv_usec;
+
     printf("train finished!!\n");
-    printf("train epoch : %d\nnodes in hidden layer : %d\ntime for training : %f\n", opts.numepochs, Nodes_1,
-           timeuse /1000000.0);
+    printf("train epoch : %d\nnodes in hidden layer : %d\ntime for convolution and pooling : %f\ntime for training : %f\n", opts.numepochs, Nodes_1,
+           timeuse1 /1000000.0, timeuse2 /1000000.0);
     savecnn(cnn,"../train_of_cnn_1_on_numbers.cnn");
 }
 
@@ -105,3 +109,4 @@ int main()
     return 0;
 
 }
+    

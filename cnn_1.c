@@ -103,13 +103,16 @@ void cnntrain(CNN_1* cnn, ImgArr inputData, CNNOpts opts, int trainNum)
 void cnnff(CNN_1* cnn, float* inputData)
 {
     nSize nnSize_H1 = {cnn->H1->inputNum, cnn->H1->outputNum}; //forward feeding H1
-    nnff(cnn->H1->v, inputData, cnn->H1->wData, cnn->H1->biasData, nnSize_H1);
-    
+
+
+        nnff(cnn->H1->v, inputData, cnn->H1->wData, cnn->H1->biasData, nnSize_H1);
+
     for(int i = 0; i < cnn->H1->outputNum; ++i) //activation H1
         cnn->H1->y[i] = activation_Relu(cnn->H1->v[i], cnn->H1->biasData[i]);
 
     nSize nnSize_O1 = {cnn->O1->inputNum, cnn->O1->outputNum}; //forward feeding O1
-    nnff(cnn->O1->v, cnn->H1->y, cnn->O1->wData, cnn->O1->biasData, nnSize_O1);
+
+        nnff(cnn->O1->v, cnn->H1->y, cnn->O1->wData, cnn->O1->biasData, nnSize_O1);
     //v : output of dotpro; y : input of dotpro  wData: [i][j] i = size of O1 j: size of H1
 
     for(int i = 0; i < cnn->O1->outputNum; ++i) //activation O1
@@ -119,10 +122,27 @@ void cnnff(CNN_1* cnn, float* inputData)
 //input * wight + bias
 void nnff(float* output, float* input, float** wdata, float* bias, nSize nnSize)
 {
+    int i = 0;
     int w = nnSize.c;
     int h = nnSize.r;
-    for(int i = 0; i < h; ++i) output[i] = vecMulti(input, wdata[i], w) + bias[i];
+    omp_set_num_threads(2);
+#pragma omp parallel
+        {
+            int id = omp_get_thread_num();
+            for (i = id; i < h; i = i + 2)
+            {
+                output[i] = vecMulti(input, wdata[i], w) + bias[i];
+            }
+        }
+
 }
+
+//void nnff(float* output, float* input, float** wdata, float* bias, nSize nnSize)
+//{
+//    int w = nnSize.c;
+//    int h = nnSize.r;
+//    for(int i = 0; i < h; ++i) output[i] = vecMulti(input, wdata[i], w) + bias[i];
+//}
 
 // activation function sigmod
 float activation_Sigma(float input,float biaas)
