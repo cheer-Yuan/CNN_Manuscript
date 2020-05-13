@@ -57,17 +57,16 @@ void train_cnn_1()
 
     struct timeval start, end1, end2;
     gettimeofday(&start, NULL );
-
-    avereduce4(trainImg);   //32 * 32
-    conv4kern(trainImg);    //30 * 30 * 4
-    maxpooling2s2(trainImg);    //15 * 15 * 4 = 900
+    avereduce4(trainImg);   //compressing to 32 * 32
+    conv4kern(trainImg);    //convolution with 4 3*3 kernel, to 30 * 30 * 4
+    maxpooling2s2(trainImg);    //pooling to 15 * 15 * 4 = 900 node in the input layer in the network
     gettimeofday(&end1, NULL );
-
     cnntrain(cnn, trainImg, opts, trainNum);
-
     gettimeofday(&end2, NULL );
+
+
     long timeuse1 = 1000000 * ( end1.tv_sec - start.tv_sec ) + end1.tv_usec - start.tv_usec;
-    long timeuse2 = 1000000 * ( end2.tv_sec - start.tv_sec ) + end2.tv_usec - end1.tv_usec;
+    long timeuse2 = 1000000 * ( end2.tv_sec - end1.tv_sec ) + end2.tv_usec - end1.tv_usec;
 
     printf("train finished!!\n");
     printf("train epoch : %d\nnodes in hidden layer : %d\ntime for convolution and pooling : %f\ntime for training : %f\n", opts.numepochs, Nodes_1,
