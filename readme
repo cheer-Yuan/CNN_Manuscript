@@ -1,8 +1,6 @@
 Project: CNN Manuscript
 
 Version 0.0:
-
-<<<<<<< dev >>>>>>> 
 features : 
   -PNG 2 PPM : OK
   -reader P6 RGB PPM : OK
@@ -11,4 +9,10 @@ features :
   
 Version 1.0:
 
-Adding mpi functions
+OK for training on massive data
+
+Version 2.0:
+
+Precision : 89%
+
+Version 3.0: parallel with openmp
